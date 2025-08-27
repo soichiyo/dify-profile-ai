@@ -1,0 +1,4206 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: Prairie AI Agent_v2
+  use_icon_as_answer_icon: true
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.2.3@5a7f82fa86e28332ad51941d0b491c1e8a38ead539656442f7bf4c6129cd15fa
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables:
+  - description: ''
+    id: 2d78619c-e8f1-454c-8dab-c057a7f60e9e
+    name: captured_profile_cache
+    selector:
+    - conversation
+    - captured_profile_cache
+    value: {}
+    value_type: object
+  - description: '説明: プロファイリング中にユーザーが先行して話したリクエスト内容を、一時的に保持しておくためのキャッシュ'
+    id: 17c12107-fb3e-4087-93a7-551fc0bcc6cf
+    name: captured_request_cache
+    selector:
+    - conversation
+    - captured_request_cache
+    value: ''
+    value_type: string
+  - description: ''
+    id: bacbfac5-a1da-420e-a022-7f90d554da80
+    name: memory
+    selector:
+    - conversation
+    - memory
+    value: []
+    value_type: array[object]
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: 'こんにちは！私は、あなたの目標達成に最適な人物との出会いを創出するAI、Prairie AIです。
+
+
+      まず初めに、あなたのことについて少し教えていただけますか？
+
+      現在どのようなことに取り組んでいて、どのような人物との出会いを求めているかなど、自由にお聞かせください。'
+    retriever_resource:
+      enabled: false
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: true
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: if-else
+      id: 17550600850210-source-17550601184610-target
+      selected: false
+      source: '17550600850210'
+      sourceHandle: source
+      target: '17550601184610'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 17550601184610-true-17550603659250-target
+      selected: false
+      source: '17550601184610'
+      sourceHandle: 'true'
+      target: '17550603659250'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 17550603659250-source-17550620390260-target
+      selected: false
+      source: '17550603659250'
+      sourceHandle: source
+      target: '17550620390260'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: assigner
+      id: 17550620390260-source-17550620667450-target
+      selected: false
+      source: '17550620390260'
+      sourceHandle: source
+      target: '17550620667450'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17550621642540-source-17550621744400-target
+      selected: false
+      source: '17550621642540'
+      sourceHandle: source
+      target: '17550621744400'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: if-else
+      id: 17550661175780-source-17550669548750-target
+      selected: false
+      source: '17550661175780'
+      sourceHandle: source
+      target: '17550669548750'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 17550601184610-false-17550621642540-target
+      selected: false
+      source: '17550601184610'
+      sourceHandle: 'false'
+      target: '17550621642540'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 17550669548750-false-17551596791270-target
+      selected: false
+      source: '17550669548750'
+      sourceHandle: 'false'
+      target: '17551596791270'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: if-else
+      id: 17551596791270-source-17551656610950-target
+      selected: false
+      source: '17551596791270'
+      sourceHandle: source
+      target: '17551656610950'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17551658398830-source-17551660070480-target
+      selected: false
+      source: '17551658398830'
+      sourceHandle: source
+      target: '17551660070480'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17551688288560-source-17551689386760-target
+      selected: false
+      source: '17551688288560'
+      sourceHandle: source
+      target: '17551689386760'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17551660546480-source-17551689434150-target
+      selected: false
+      source: '17551660546480'
+      sourceHandle: source
+      target: '17551689434150'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 17550601184610-5dbbfc0b-a6f1-4b10-b8fb-f1367e00b417-17551596791270-target
+      selected: false
+      source: '17550601184610'
+      sourceHandle: 5dbbfc0b-a6f1-4b10-b8fb-f1367e00b417
+      target: '17551596791270'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17550621642540-fail-branch-1755214503739-target
+      selected: false
+      source: '17550621642540'
+      sourceHandle: fail-branch
+      target: '1755214503739'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: assigner
+      id: 1755253097776-source-1755253253995-target
+      selected: false
+      source: '1755253097776'
+      sourceHandle: source
+      target: '1755253253995'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: assigner
+        targetType: answer
+      id: 1755253253995-source-17550670509390-target
+      selected: false
+      source: '1755253253995'
+      sourceHandle: source
+      target: '17550670509390'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 17550601184610-ad396fd1-064e-4653-af5d-df4db2ee89a8-17555693082030-target
+      selected: false
+      source: '17550601184610'
+      sourceHandle: ad396fd1-064e-4653-af5d-df4db2ee89a8
+      target: '17555693082030'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 17555693082030-source-17555701360760-target
+      selected: false
+      source: '17555693082030'
+      sourceHandle: source
+      target: '17555701360760'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: assigner
+      id: 17555701360760-source-17555702366390-target
+      selected: false
+      source: '17555701360760'
+      sourceHandle: source
+      target: '17555702366390'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17555754302730-source-17555756807370-target
+      selected: false
+      source: '17555754302730'
+      sourceHandle: source
+      target: '17555756807370'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: assigner
+        targetType: llm
+      id: 1755576682837-source-17555754302730-target
+      selected: false
+      source: '1755576682837'
+      sourceHandle: source
+      target: '17555754302730'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: assigner
+      id: 17550601184610-ee2fb873-9609-4b49-b919-a87861680e62-1755576682837-target
+      selected: false
+      source: '17550601184610'
+      sourceHandle: ee2fb873-9609-4b49-b919-a87861680e62
+      target: '1755576682837'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 17555772893160-source-1755253097776-target
+      selected: false
+      source: '17555772893160'
+      sourceHandle: source
+      target: '1755253097776'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: if-else
+      id: 17550669548750-true-1755581527444-target
+      selected: false
+      source: '17550669548750'
+      sourceHandle: 'true'
+      target: '1755581527444'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1755581527444-true-17555816082210-target
+      selected: false
+      source: '1755581527444'
+      sourceHandle: 'true'
+      target: '17555816082210'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: 17555816082210-source-1755583116426-target
+      selected: false
+      source: '17555816082210'
+      sourceHandle: source
+      target: '1755583116426'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: assigner
+      id: 1755583116426-source-17555832109000-target
+      selected: false
+      source: '1755583116426'
+      sourceHandle: source
+      target: '17555832109000'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: if-else
+      id: 1755583954150-source-1755584117347-target
+      selected: false
+      source: '1755583954150'
+      sourceHandle: source
+      target: '1755584117347'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1755584117347-false-17550600850210-target
+      selected: false
+      source: '1755584117347'
+      sourceHandle: 'false'
+      target: '17550600850210'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1755584864069-source-1755585672345-target
+      selected: false
+      source: '1755584864069'
+      sourceHandle: source
+      target: '1755585672345'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 17550601184610-917267ba-3223-46ff-b32e-5888ad815262-1755587098480-target
+      selected: false
+      source: '17550601184610'
+      sourceHandle: 917267ba-3223-46ff-b32e-5888ad815262
+      target: '1755587098480'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1755587098480-source-1755587184420-target
+      selected: false
+      source: '1755587098480'
+      sourceHandle: source
+      target: '1755587184420'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: if-else
+      id: 17555989086750-source-1755599062653-target
+      selected: false
+      source: '17555989086750'
+      sourceHandle: source
+      target: '1755599062653'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: answer
+      id: 1755599062653-false-17555706503860-target
+      selected: false
+      source: '1755599062653'
+      sourceHandle: 'false'
+      target: '17555706503860'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: answer
+      id: 17555991306140-false-17555832835340-target
+      selected: false
+      source: '17555991306140'
+      sourceHandle: 'false'
+      target: '17555832835340'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: if-else
+      id: 1755598782790-source-17555991306140-target
+      selected: false
+      source: '1755598782790'
+      sourceHandle: source
+      target: '17555991306140'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1755599442832-source-1755598782790-target
+      selected: false
+      source: '1755599442832'
+      sourceHandle: source
+      target: '1755598782790'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: assigner
+        targetType: code
+      id: 17555832109000-source-1755599442832-target
+      selected: false
+      source: '17555832109000'
+      sourceHandle: source
+      target: '1755599442832'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: assigner
+        targetType: code
+      id: 17555702366390-source-17555996655750-target
+      selected: false
+      source: '17555702366390'
+      sourceHandle: source
+      target: '17555996655750'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 17555996655750-source-17555989086750-target
+      selected: false
+      source: '17555996655750'
+      sourceHandle: source
+      target: '17555989086750'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: assigner
+        targetType: code
+      id: 17550620667450-source-17555998217170-target
+      selected: false
+      source: '17550620667450'
+      sourceHandle: source
+      target: '17555998217170'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 17555998217170-source-17550661175780-target
+      source: '17555998217170'
+      sourceHandle: source
+      target: '17550661175780'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1755581527444-false-17555998980340-target
+      source: '1755581527444'
+      sourceHandle: 'false'
+      target: '17555998980340'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 17555998980340-source-17555772893160-target
+      source: '17555998980340'
+      sourceHandle: source
+      target: '17555772893160'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 17551656610950-true-17556000000140-target
+      source: '17551656610950'
+      sourceHandle: 'true'
+      target: '17556000000140'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 17556000000140-source-17551660546480-target
+      source: '17556000000140'
+      sourceHandle: source
+      target: '17551660546480'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 17551656610950-0ecb0700-9c3b-4bfa-8433-ed335e40937e-17556000708650-target
+      source: '17551656610950'
+      sourceHandle: 0ecb0700-9c3b-4bfa-8433-ed335e40937e
+      target: '17556000708650'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 17556000708650-source-17551658398830-target
+      source: '17556000708650'
+      sourceHandle: source
+      target: '17551658398830'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 17551656610950-false-17556000775140-target
+      source: '17551656610950'
+      sourceHandle: 'false'
+      target: '17556000775140'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 17556000775140-source-17551688288560-target
+      selected: false
+      source: '17556000775140'
+      sourceHandle: source
+      target: '17551688288560'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 17555991306140-true-1755600212316-target
+      source: '17555991306140'
+      sourceHandle: 'true'
+      target: '1755600212316'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1755600212316-source-1755600389924-target
+      source: '1755600212316'
+      sourceHandle: source
+      target: '1755600389924'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17556004106170-source-17556004131570-target
+      source: '17556004106170'
+      sourceHandle: source
+      target: '17556004131570'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1755599062653-true-17556004106170-target
+      source: '1755599062653'
+      sourceHandle: 'true'
+      target: '17556004106170'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: if-else
+      id: 1723433389887-source-1755604753838-target
+      source: '1723433389887'
+      sourceHandle: source
+      target: '1755604753838'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1755604753838-true-1755583954150-target
+      source: '1755604753838'
+      sourceHandle: 'true'
+      target: '1755583954150'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1755584117347-true-1755584864069-target
+      source: '1755584117347'
+      sourceHandle: 'true'
+      target: '1755584864069'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1755604753838-false-17550600850210-target
+      source: '1755604753838'
+      sourceHandle: 'false'
+      target: '17550600850210'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1755584117347-19e220aa-d4b8-4c18-a8be-0d8d897de6a4-1756201560250-target
+      source: '1755584117347'
+      sourceHandle: 19e220aa-d4b8-4c18-a8be-0d8d897de6a4
+      target: '1756201560250'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1756201560250-source-1756201679026-target
+      source: '1756201560250'
+      sourceHandle: source
+      target: '1756201679026'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 17550601184610-9ea327bd-0f55-4454-bc22-1078a0861237-1756202663914-target
+      source: '17550601184610'
+      sourceHandle: 9ea327bd-0f55-4454-bc22-1078a0861237
+      target: '1756202663914'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1756202663914--1756202837930-target
+      source: '1756202663914'
+      sourceHandle: source
+      target: '1756202837930'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 17550601184610-38b1c5dc-9063-464c-aa80-7b2d2ade48d1-1756203059035-target
+      source: '17550601184610'
+      sourceHandle: 38b1c5dc-9063-464c-aa80-7b2d2ade48d1
+      target: '1756203059035'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1756203059035-source-1756203308614-target
+      source: '1756203059035'
+      sourceHandle: source
+      target: '1756203308614'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: ユーザー入力
+        type: start
+        variables: []
+      height: 54
+      id: '1723433389887'
+      position:
+        x: 30
+        y: 2153.5
+      positionAbsolute:
+        x: 30
+        y: 2153.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: "# あなたが利用できる情報（コンテキスト）\n- これは現在のワーキングメモリの状態です。もし空（{}）や空の配列（[]）ならば、これが最初の対話です。\n\
+            \  - 現在のワーキングメモリ: {{#conversation.memory#}}\n- これはユーザーからの最新のメッセージです。\n\
+            \  - ユーザーの最新メッセージ: {{#sys.query#}}"
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 4447a6dc-5818-47ff-9b4d-a64792e4e8dc
+          role: system
+          text: '# あなたの役割（アイデンティティ）
+
+            あなたは「Profile AI」、ユーザーのプロフィールを構築するために、対話の次のステップを決定する、戦略的なAIインタビュアーです。
+
+
+            # 普遍的なルール
+
+            出力は、「topic」「thinking_process」「next_action」「captured_request」、そして「captured_profile_info」の5つのキーを持つJSONオブジェクトでなければなりません。'
+        - id: 3920b088-f8f3-48d5-8c54-c3a82c023507
+          role: user
+          text: "# あなたの厳密なタスク\nあなたの唯一のタスクは、以下のルールに**厳密に**従って、ユーザーの意図を判断し、次に取るべき最適なアクションを決定することです。\n\
+            \n## 思考のステップ 兼 アクション決定のルール\n\n1.  **【最優先】ロードマップ提示の判断:**\n    - まず、ワーキングメモリの`interaction_state`に`roadmap_presented:\
+            \ true`というフラグがあるか確認します。\n    - **もしフラグがない場合（＝まだロードマップを提示していない）:**\n  \
+            \      - かつ、ユーザーの最新メッセージに**名前、会社名、役職**といった具体的なプロフィール情報が**一つでも含まれている**か、あるいはメモリ内にそれらの情報が**一つでも存在する**場合、`next_action`は必ず**`PRESENT_ROADMAP`**にしてください。\n\
+            \n2.  **【次に】悩みへのコーチング介入:**\n    - ユーザーのメッセージが「分からない」「難しい」といった**思考の停滞や悩み**を示している場合、`next_action`は`COACHING_INTERVENTION`にしてください。\n\
+            \n3.  **【通常フロー】プロファイリング or リクエストヒアリング:**\n    - `phase`が`request_hearing`なら\
+            \ → `PROCESS_REQUEST`\n    - `phase`が`profiling`（または`consulting`）で、\n\
+            \        - `topic`が`PROFILING`なら → `UPDATE_MEMORY`\n        - `topic`が`REQUEST`なら\
+            \ → `GUIDE_TO_PROFILING`\n\n（※これまでの`ASK_FOR_NAME_FIRST`などのルールは、この新しい`PRESENT_ROADMAP`のロジックに吸収・統合されます）"
+        - id: d91a897b-2487-4588-b2b5-cf7790a6da08
+          role: assistant
+          text: "# 出力例（プロフィールとリクエストが混在した場合）\n{\n  \"topic\": \"REQUEST\",\n  \"thinking_process\"\
+            : \"ユーザーはリクエストと一部のプロフィール情報を同時に話していますが、まだプロファイリングが完了していません。まず対話を誘導し、その間に提供されたプロフィール情報を一時的に記憶します。\"\
+            ,\n  \"next_action\": \"GUIDE_TO_PROFILING\",\n  \"captured_request\"\
+            : \"同じ分野で事業を立ち上げた経験のある起業家と話したい\",\n  \"captured_profile_info\": {\n  \
+            \  \"name\": \"佐藤真理子\",\n    \"company\": \"Connect Inc.\",\n    \"role\"\
+            : null\n  }\n}"
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              captured_profile_info:
+                description: もし`next_action`が`GUIDE_TO_PROFILING`の場合で、ユーザーの発言にプロフィール情報が含まれていれば、ここにその情報がオブジェクトとして入る。それ以外はnull。
+                properties:
+                  company:
+                    type:
+                    - string
+                    - 'null'
+                  name:
+                    type:
+                    - string
+                    - 'null'
+                  role:
+                    type:
+                    - string
+                    - 'null'
+                type:
+                - object
+                - 'null'
+              captured_request:
+                description: もし`next_action`が`GUIDE_TO_PROFILING`の場合、ここにユーザーのリクエスト内容の要約が入る。それ以外はnull。
+                type:
+                - string
+                - 'null'
+              next_action:
+                description: 次に実行すべきアクションコード。
+                enum:
+                - UPDATE_MEMORY
+                - ASK_FOR_MORE_INFO
+                - ANALYZE_RESPONSE_INTENT
+                - PROCESS_REQUEST
+                - GUIDE_TO_PROFILING
+                - COACHING_INTERVENTION
+                type: string
+              thinking_process:
+                description: なぜ次のアクションを選択したのか、その思考プロセスの簡潔な説明。
+                type: string
+              topic:
+                description: ユーザーの発言の主題。'PROFILING'（自己紹介など）、'REQUEST'（会いたい人の話）、または'OTHER'（その他）のいずれか。
+                enum:
+                - PROFILING
+                - REQUEST
+                - OTHER
+                type: string
+            required:
+            - topic
+            - thinking_process
+            - next_action
+            - captured_request
+            - captured_profile_info
+            type: object
+        structured_output_enabled: true
+        title: 2. 思考と判断
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+          enabled: false
+      height: 119
+      id: '17550600850210'
+      position:
+        x: 2216
+        y: 2089
+      positionAbsolute:
+        x: 2216
+        y: 2089
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: contains
+            id: ce01e29b-8afa-42c9-9cd0-16aa9c3dc06e
+            value: UPDATE_MEMORY
+            varType: string
+            variable_selector:
+            - '17550600850210'
+            - structured_output
+            - next_action
+          id: 'true'
+          logical_operator: and
+        - case_id: ad396fd1-064e-4653-af5d-df4db2ee89a8
+          conditions:
+          - comparison_operator: is
+            id: 073edddd-f686-474e-a26a-b9c5ce002205
+            value: PROCESS_REQUEST
+            varType: object
+            variable_selector:
+            - '17550600850210'
+            - structured_output
+            - next_action
+          id: ad396fd1-064e-4653-af5d-df4db2ee89a8
+          logical_operator: and
+        - case_id: ee2fb873-9609-4b49-b919-a87861680e62
+          conditions:
+          - comparison_operator: contains
+            id: 174c0ecd-c642-4f45-a4e5-c9e29c00f530
+            value: GUIDE_TO_PROFILING
+            varType: string
+            variable_selector:
+            - '17550600850210'
+            - structured_output
+            - next_action
+          id: ee2fb873-9609-4b49-b919-a87861680e62
+          logical_operator: and
+        - case_id: 5dbbfc0b-a6f1-4b10-b8fb-f1367e00b417
+          conditions:
+          - comparison_operator: is
+            id: 09fd9182-15b5-4725-ab68-d1cd8c7cd438
+            value: ANALYZE_RESPONSE_INTENT
+            varType: object
+            variable_selector:
+            - '17550600850210'
+            - structured_output
+            - next_action
+          id: 5dbbfc0b-a6f1-4b10-b8fb-f1367e00b417
+          logical_operator: and
+        - case_id: 917267ba-3223-46ff-b32e-5888ad815262
+          conditions:
+          - comparison_operator: is
+            id: 6890e59e-e81d-4e9d-a111-7f335a563a71
+            value: ASK_FOR_NAME_FIRST
+            varType: object
+            variable_selector:
+            - '17550600850210'
+            - structured_output
+            - next_action
+          id: 917267ba-3223-46ff-b32e-5888ad815262
+          logical_operator: and
+        - case_id: 9ea327bd-0f55-4454-bc22-1078a0861237
+          conditions:
+          - comparison_operator: is
+            id: c7108901-10ea-4b5d-a96c-7d3524f9e043
+            value: PRESENT_ROADMAP
+            varType: object
+            variable_selector:
+            - '17550600850210'
+            - structured_output
+            - next_action
+          id: 9ea327bd-0f55-4454-bc22-1078a0861237
+          logical_operator: and
+        - case_id: 38b1c5dc-9063-464c-aa80-7b2d2ade48d1
+          conditions:
+          - comparison_operator: is
+            id: f6815072-6c3b-4dc9-8c50-3153eade4de5
+            value: COACHING_INTERVENTION
+            varType: object
+            variable_selector:
+            - '17550600850210'
+            - structured_output
+            - next_action
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: アクション分岐
+        type: if-else
+      height: 414
+      id: '17550601184610'
+      position:
+        x: 2550
+        y: 2053.5
+      positionAbsolute:
+        x: 2550
+        y: 2053.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: "# あなたが利用できる情報（コンテキスト）\n- これが**更新前**のプロフィール情報です（空の場合もあります）。\n\
+            \  - 前回のプロフィール情報: {{#conversation.memory#}}\n\n- これは、ユーザーが先行して話した**プロフィール情報の断片**です（空の場合もあります）。キャッシュされたプロフィール情報:\
+            \ {{#conversation.captured_profile_cache#}}\n- これが、ユーザーから提供された**最新のメッセージ**です。\n\
+            \  - ユーザーの最新メッセージ: {{#sys.query#}}"
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: c99691e0-c192-4f14-8caa-3ea897c01bea
+          role: system
+          text: '# あなたの役割（アイデンティティ）
+
+            あなたは「Profile AI」、複数の情報源を統合し、ユーザーの「ワーキングメモリ」を構造化されたJSON形式で、細心の注意を払って維持管理する、高度なデータ統合AIです。
+
+
+            # 普遍的なルール
+
+            あなたの出力は、必ず「構造化出力」で定義されたJSONスキーマに厳密に従った、生のJSONオブジェクトのみでなければなりません。'
+        - id: 5476fec1-333c-4236-a6ca-9c135097f7bb
+          role: user
+          text: '# あなたの厳密なタスク
+
+            あなたの唯一のタスクは、**上記3つの情報源すべてを考慮**し、**更新された完全なプロフィール情報のJSONオブジェクトを生成すること**です。
+
+
+            ## 更新の絶対的なルール
+
+            1.  **統合:** 「前回のプロフィール情報」「キャッシュされたプロフィール情報」「ユーザーの最新メッセージ」に含まれる**すべての情報を、重複なく統合**してください。
+
+            2.  **ゼロから作成:** すべての情報源が空の場合、最新メッセージだけを元に構築してください。
+
+            3.  **既存情報の保持:** 既存の情報は、新しい情報で明確に上書きされない限り、必ず保持してください。
+
+            4.  **推論:** すべての情報を元に、`qualitative_info`（価値観、動機など）を豊かにしてください。
+
+
+            # 名前の抽出に関する特別ルール
+
+            - ユーザーのメッセージに「私は〇〇です」「〇〇と申します」といった、明確な名前の提示があれば、それを必ず`profile.static_info.name`に格納してください。'
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              interaction_state:
+                description: 現在の対話の状態を管理する。
+                properties:
+                  last_update:
+                    description: 最終更新日時
+                    type: string
+                  phase:
+                    default: profiling
+                    description: 現在の会話フェーズ。'profiling' または 'request_hearing'。
+                    type: string
+                type: object
+              profile:
+                description: 対話から抽出されたユーザーのプロフィール情報。
+                properties:
+                  qualitative_info:
+                    description: ビジョン、価値観、動機などの定性的な情報。
+                    properties:
+                      core_vision:
+                        description: ユーザーが持つ中心的なビジョンや抽象的な目標
+                        type: string
+                      motivations:
+                        description: 推測されるユーザーの動機のリスト
+                        items:
+                          type: string
+                        type: array
+                      values:
+                        description: 推測されるユーザーの価値観のリスト
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  static_info:
+                    description: 名前、会社、役割などの事実情報。
+                    properties:
+                      company:
+                        description: ユーザーが所属する会社名
+                        type: string
+                      name:
+                        description: ユーザーの名前
+                        type: string
+                      role:
+                        description: ユーザーの役割や役職
+                        type: string
+                    type: object
+                type: object
+              user_id:
+                description: ユーザーの一意なID。最初はプレースホルダーで良い。
+                type: string
+            required:
+            - profile
+            - interaction_state
+            type: object
+        structured_output_enabled: true
+        title: メモリ抽出・更新
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+          enabled: false
+      height: 119
+      id: '17550603659250'
+      position:
+        x: 2975
+        y: 630
+      positionAbsolute:
+        x: 2975
+        y: 630
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\nimport datetime\n\ndef main(**kwargs) -> dict:\n    \"\
+          \"\"\n    LLMから出力されたJSON文字列をパースし、\n    新しいスキーマに合わせてワーキングメモリオブジェクトを構築・更新する。\n\
+          \    \"\"\"\n    try:\n        llm_output_str = kwargs.get('arg1', '')\n\
+          \        # ★追加：前回のメモリも入力として受け取る（更新処理のため）\n        previous_memory_str =\
+          \ kwargs.get('arg2', '{}')\n        \n        # --- LLM出力のパース処理（変更なし） ---\n\
+          \        if not isinstance(llm_output_str, str) or not llm_output_str.strip():\n\
+          \            return {\"error\": \"Input from LLM node is empty or not a\
+          \ string.\"}\n\n        start_index = llm_output_str.find('{')\n       \
+          \ end_index = llm_output_str.rfind('}') + 1\n        \n        if start_index\
+          \ == -1 or end_index == 0:\n            raise json.JSONDecodeError(\"JSON\
+          \ object not found in the input string.\", llm_output_str, 0)\n        \
+          \    \n        json_str = llm_output_str[start_index:end_index]\n      \
+          \  new_data = json.loads(json_str)\n        \n        # --- メモリの更新ロジックを強化\
+          \ ---\n        # 前回のメモリをdictにパース\n        try:\n            previous_memory\
+          \ = json.loads(previous_memory_str) if previous_memory_str and previous_memory_str\
+          \ != '{}' else {}\n        except:\n            previous_memory = {}\n\n\
+          \        # ★★★ ここからが新しい構造に対応した更新処理 ★★★\n        \n        # profile部分の更新（深い階層までマージ）\n\
+          \        updated_profile = previous_memory.get(\"profile\", {})\n      \
+          \  new_profile = new_data.get(\"profile\", {})\n        \n        if new_profile.get(\"\
+          static_info\"):\n            updated_profile.setdefault(\"static_info\"\
+          , {}).update(new_profile[\"static_info\"])\n        if new_profile.get(\"\
+          qualitative_info\"):\n             updated_profile.setdefault(\"qualitative_info\"\
+          , {}).update(new_profile[\"qualitative_info\"])\n\n        # interaction_state部分の更新\n\
+          \        updated_state = previous_memory.get(\"interaction_state\", {})\n\
+          \        # デフォルトのフェーズを設定\n        if \"phase\" not in updated_state:\n \
+          \           updated_state[\"phase\"] = \"profiling\"\n        # 最終更新日時を現在時刻に設定\n\
+          \        updated_state[\"last_update\"] = datetime.datetime.utcnow().isoformat()\
+          \ + \"Z\"\n\n        # Difyの変数代入ノードに渡すための最終的なオブジェクトを構築する\n        result\
+          \ = {\n            \"user_id\": previous_memory.get(\"user_id\") or new_data.get(\"\
+          user_id\", \"placeholder\"),\n            \"interaction_state\": updated_state,\n\
+          \            \"profile\": updated_profile\n        }\n        \n       \
+          \ return {\n            \"mem\": result\n        }\n\n    except json.JSONDecodeError\
+          \ as e:\n        return { \"error\": f\"Invalid JSON format: {e}\" }\n \
+          \   except Exception as e:\n        return { \"error\": f\"An unexpected\
+          \ error occurred: {str(e)}\" }"
+        code_language: python3
+        desc: ''
+        outputs:
+          mem:
+            children: null
+            type: object
+        selected: false
+        title: JSON -> オブジェクト変換
+        type: code
+        variables:
+        - value_selector:
+          - '17550603659250'
+          - text
+          value_type: string
+          variable: arg1
+      height: 54
+      id: '17550620390260'
+      position:
+        x: 3309
+        y: 630
+      positionAbsolute:
+        x: 3309
+        y: 630
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        assigned_variable_selector:
+        - conversation
+        - memory
+        desc: ''
+        input_variable_selector:
+        - '1723441002334'
+        - mem
+        items:
+        - input_type: variable
+          operation: append
+          value:
+          - '17550620390260'
+          - mem
+          variable_selector:
+          - conversation
+          - memory
+          write_mode: over-write
+        selected: false
+        title: メモリ保存
+        type: assigner
+        version: '2'
+        write_mode: append
+      height: 86
+      id: '17550620667450'
+      position:
+        x: 3643
+        y: 630
+      positionAbsolute:
+        x: 3643
+        y: 630
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        error_strategy: fail-branch
+        memory:
+          query_prompt_template: "# あなたが利用できる情報（コンテキスト）\n- ユーザーの入力：{{#sys.query#}}\n\
+            - なぜ次の質問が必要かの理由（あなたの自己分析）: \n{{#17550600850210.structured_output.thinking_process#}}\n\
+            - 現在のワーキングメモリの状態（空の場合もあります）: {{#conversation.memory#}}"
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: c162dbfd-5159-4df9-9e06-9d638522c6be
+          role: system
+          text: '# あなたの役割（アイデンティティ）
+
+            あなたは「Profile AI」、ユーザーとの対話を常に本質的な目的に向けて、優しくガイドするのが得意な、超一流のインタビュアーです。'
+        - id: 936c311a-93d0-4649-8ef6-bcb11a261247
+          role: user
+          text: '# あなたの厳密なタスク
+
+            あなたの役割は、コンテキストを分析し、**停滞している対話をプロファイリングの本題へと自然に戻すための、温かみのある質問を1つだけ**生成することです。
+
+            - もしワーキングメモリがまだ空なら、プロファイリングを開始するための最初の質問をしてください。
+
+            - もしメモリに情報が少しでもあるなら、その情報を肯定しつつ、次なる情報を尋ねてください。
+
+            - ユーザーの直前の発言（挨拶やお礼など）にも、軽く触れるとより自然な会話になります。
+
+            - 出力は、ユーザーに問いかける**質問文そのものだけ**にしてください。
+
+
+            ## 応答のパーソナライズに関するルール
+
+            - もし「ユーザーの名前」が判明している場合は、応答の冒頭で「〇〇さん、」と自然に呼びかけることから始めてください。
+
+            - ただし、不自然にならないよう、毎回必ず呼びかける必要はありません。文脈に応じて、最も人間らしいコミュニケーションを選択してください。'
+        - id: 6caf7266-fba3-4d34-83eb-5eb3525eab26
+          role: assistant
+          text: '# 出力例
+
+
+            ## 例1（メモリが空で、ユーザーが「こんにちは」と言った場合）
+
+            こんにちは！お話しできることを嬉しく思います。
+
+            早速ですが、あなたのことを少し教えていただけますか？まずはお名前からお伺いしてもよろしいでしょうか。
+
+
+            ## 例2（メモリに名前だけあり、ユーザーが「ありがとう」と言った場合）
+
+            どういたしまして！田中さんのことをもっと知るのが楽しみです。
+
+            次に、田中さんが現在どのような会社で、どんな役割を担っていらっしゃるのか、教えていただけますか？'
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        title: 追加質問生成
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+          enabled: false
+      height: 155
+      id: '17550621642540'
+      position:
+        x: 6983
+        y: 2143
+      positionAbsolute:
+        x: 6983
+        y: 2143
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#17550621642540.text#}}'
+        desc: ''
+        selected: false
+        title: 追加質問応答
+        type: answer
+        variables: []
+      height: 105
+      id: '17550621744400'
+      position:
+        x: 7317
+        y: 2186
+      positionAbsolute:
+        x: 7317
+        y: 2186
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        error_strategy: fail-branch
+        memory:
+          query_prompt_template: "# あなたが利用できる情報（コンテキスト）\n- ユーザーの入力：{{#sys.query#}}\n\
+            - 現在のワーキングメモリの状態（空の場合もあります）: {{#conversation.memory#}}\n- これが、ユーザーから受け取った最新のリクエスト情報です。\n\
+            \  - ユーザーリクエスト: {{#17555998217170.requests_context#}}\n- 参考までに、これがユーザー自身のプロフィールです。\n\
+            \  - ユーザープロフィール: {{#17555998217170.profile_context#}}"
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 4447a6dc-5818-47ff-9b4d-a64792e4e8dc
+          role: system
+          text: "# あなたの役割（アイデンティティ）\nあなたは、ユーザープロファイルの完成度を評価し、次なる対話の方向性を決定する、熟練のインタビュアーです。あなたの最終目標は、ユーザーの「プロフィール」と「会いたい人のリクエスト」の両方を完璧に把握することです。\n\
+            \n# あなたの厳密なタスク\n最新のワーキングメモリを分析し、現段階である「プロファイリング」が完了したか、それとも「さらなる深掘りが必要」かを判断してください。\n\
+            あなたの出力は、「status」と「reasoning」という2つのキーを持つJSONオブジェクトでなければなりません。\n\n1.  **status**:\
+            \ 以下のうち、必ず1つを選択してください。\n    - `PROFILE_COMPLETE`: プロファイリングが完了したと判断できる場合。具体的には、ワーキングメモリ内の\
+            \ `profile` オブジェクトにおいて、`static_info` の `name` と `role`、そして `qualitative_info`\
+            \ の `core_vision` のすべてに具体的な内容が記述されている場合。\n    - `NEED_MORE_DETAILS`: 上記の条件を1つでも満たしていない場合。\n\
+            \n2.  **reasoning**: なぜその `status` を選択したのか、その理由と、**次に深掘りすべき具体的な項目**を簡潔に記述してください。"
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              reasoning:
+                type: string
+              status:
+                type: string
+            required:
+            - status
+            - reasoning
+            type: object
+        structured_output_enabled: true
+        title: プロファイル完成度チェック
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+          enabled: false
+      height: 155
+      id: '17550661175780'
+      position:
+        x: 4311
+        y: 630
+      positionAbsolute:
+        x: 4311
+        y: 630
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: contains
+            id: ce01e29b-8afa-42c9-9cd0-16aa9c3dc06e
+            value: PROFILE_COMPLETE
+            varType: string
+            variable_selector:
+            - '17550661175780'
+            - structured_output
+            - status
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 完成度による応答分岐
+        type: if-else
+      height: 126
+      id: '17550669548750'
+      position:
+        x: 4645
+        y: 630
+      positionAbsolute:
+        x: 4645
+        y: 630
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#17555772893160.text#}}'
+        desc: ''
+        selected: false
+        title: プロファイル完了応答
+        type: answer
+        variables: []
+      height: 105
+      id: '17550670509390'
+      position:
+        x: 7651
+        y: 538.5
+      positionAbsolute:
+        x: 7651
+        y: 538.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        error_strategy: fail-branch
+        memory:
+          query_prompt_template: '# あなたが利用できる情報（コンテキスト）
+
+            - ユーザーの最新メッセージ: {{#sys.query#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 4447a6dc-5818-47ff-9b4d-a64792e4e8dc
+          role: system
+          text: '# あなたの役割
+
+            あなたは、ユーザーの応答を分析し、その意図を分類する、高度な自然言語理解（NLU）エンジンです。'
+        - id: 58624808-3673-4fac-8fc8-95d7e6fc9c70
+          role: user
+          text: "# あなたの厳密なタスク\nユーザーの最新メッセージを注意深く読み、その応答の意図が以下のどれに最も近いかを判断してください。\n\
+            あなたの出力は、「intent」と「summary」の2つのキーを持つJSONオブジェクトでなければなりません。\n\n1.  **intent**:\
+            \ 以下の**厳密な定義**に従い、必ず1つを選択してください。\n    - `POSITIVE_RESPONSE`: ユーザーが、尋ねられた質問に対して、**何らかの具体的な情報を提供しようとしている**場合。（例：「〇〇社で働いています」「私の目標は…」）\n\
+            \    - `NEGATIVE_RESPONSE`: ユーザーが、質問に対して**明確に「ない」「分からない」「言いたくない」といった否定的な意思表示**をしている場合。あるいは、「難しいですね」「考えたこともないです」のように、**情報提供をためらう**応答もこれに含みます。\n\
+            \    - `NEUTRAL_OR_UNRELATED`: 上記のどちらでもない、単純な相槌（例：「なるほど」「はい」）、感謝（例：「ありがとう」）、あるいは全く関係のない話題である場合。\n\
+            \n2.  **summary**: ユーザーの応答の要点を10文字程度で簡潔に要約してください。"
+        - id: 8fe09b2d-c8de-4437-ae80-8e1bd55fceab
+          role: assistant
+          text: '# 判断の具体例
+
+
+            ## ユーザーメッセージが「ビジョンとかは特にないですね…」の場合
+
+            { "intent": "NEGATIVE_RESPONSE", "summary": "ビジョンを否定" }
+
+
+            ## ユーザーメッセージが「うーん、難しい質問ですね」の場合
+
+            { "intent": "NEGATIVE_RESPONSE", "summary": "回答をためらう" }
+
+
+            ## ユーザーメッセージが「Connect Inc.でPMをしています」の場合
+
+            { "intent": "POSITIVE_RESPONSE", "summary": "会社と役割を回答" }
+
+
+            ## ユーザーメッセージが「なるほど」の場合
+
+            { "intent": "NEUTRAL_OR_UNRELATED", "summary": "相槌" }'
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              intent:
+                type: string
+              summary:
+                type: string
+            required:
+            - intent
+            - summary
+            type: object
+        structured_output_enabled: true
+        title: ユーザー応答の意図分析
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+          enabled: false
+      height: 155
+      id: '17551596791270'
+      position:
+        x: 5647
+        y: 1296.5
+      positionAbsolute:
+        x: 5647
+        y: 1296.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: contains
+            id: ce01e29b-8afa-42c9-9cd0-16aa9c3dc06e
+            value: POSITIVE_RESPONSE
+            varType: string
+            variable_selector:
+            - '17551596791270'
+            - structured_output
+            - intent
+          id: 'true'
+          logical_operator: and
+        - case_id: 0ecb0700-9c3b-4bfa-8433-ed335e40937e
+          conditions:
+          - comparison_operator: is
+            id: 41f84699-0ce0-4e5f-a4e6-13c751d7c021
+            value: NEGATIVE_RESPONSE
+            varType: object
+            variable_selector:
+            - '17551596791270'
+            - structured_output
+            - intent
+          id: 0ecb0700-9c3b-4bfa-8433-ed335e40937e
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 質問戦略の分岐
+        type: if-else
+      height: 174
+      id: '17551656610950'
+      position:
+        x: 5981
+        y: 1303.5
+      positionAbsolute:
+        x: 5981
+        y: 1303.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        error_strategy: fail-branch
+        memory:
+          query_prompt_template: "# あなたが利用できる情報（コンテキスト）\n\n- ユーザーの入力：{{#sys.query#}}\n\
+            - ユーザーが否定的な応答をしたという事実（{{#17551596791270.structured_output.intent#}}: NEGATIVE_RESPONSE）。\n\
+            - ユーザーの応答の要約: {{#17551596791270.structured_output.summary#}}\n- 現在のワーキングメモリの状態:\
+            \ {{#conversation.memory#}}\n- これが、ユーザーから受け取った最新のリクエスト情報です。\n  - ユーザーリクエスト:\
+            \ {{#17555998217170.requests_context#}}\n- 参考までに、これがユーザー自身のプロフィールです。\n\
+            \  - ユーザープロフィール: {{#17555998217170.profile_context#}}"
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 4447a6dc-5818-47ff-9b4d-a64792e4e8dc
+          role: system
+          text: '# あなたの役割（アイデンティティ）
+
+
+            あなたは、相手の気持ちに深く寄り添い、無理強いせずに対話の角度を巧みに変えることができる、共感力に優れたコミュニケーションの専門家です。あなたの仕事は、ユーザーが行き詰まった時に、「それでも全然大丈夫ですよ！」という安心感を与え、別の視点から新たな気づきを促すことです。'
+        - id: 58624808-3673-4fac-8fc8-95d7e6fc9c70
+          role: user
+          text: "# あなたの厳密なタスク\nあなたの唯一のタスクは、**ユーザーの応答を完全に受け入れた上で、全く異なる角度から、ポジティブで答えやすい代替質問を1つだけ生成すること**です。\n\
+            \n## 質問生成のルール\n1.  **完全な受容と安心感の提供:** まず、ユーザーの「ない」「分からない」という気持ちを**全面的に肯定**し、それが**全く問題ない**ことを伝えてください。（例：「とんでもないです！」「そういう大きな問いは、すぐに答えられる方が珍しいですよ」）\n\
+            2.  **質問の戦略的転換:** 私が以前聞こうとしていたこと（`reasoning`）の本質を捉え、それを**過去の具体的な「経験」や「感情」**を尋ねる質問に変換してください。\n\
+            \    - **「ビジョンは？」** （未来・抽象） → **「最近、楽しかったことは？」** （過去・具体・感情）\n    - **「価値観は？」**\
+            \ （信条・抽象） → **「どんな時に『良い仕事ができた』と感じますか？」** （状況・具体・感情）\n3.  出力は、ユーザーに問いかける質問文そのものだけにしてください。\n\
+            \n## 応答のパーソナライズに関するルール\n- もし「ユーザーの名前」が判明している場合は、応答の冒頭で「〇〇さん、」と自然に呼びかけることから始めてください。\n\
+            - ただし、不自然にならないよう、毎回必ず呼びかける必要はありません。文脈に応じて、最も人間らしいコミュニケーションを選択してください。"
+        - id: 8fe09b2d-c8de-4437-ae80-8e1bd55fceab
+          role: assistant
+          text: '# 出力例（ユーザーが「ビジョンはない」と答えた場合）
+
+            とんでもないです！ビジョンや目標なんて、すぐに言葉にできる方が珍しいですから、まったくお気になさらないでくださいね。
+
+
+            では、少しだけ視点を変えて、もっと身近なことからお伺いさせてください。最近のお仕事の中で、大変だったけど「これを乗り越えて良かった！」と感じたような、達成感のあった出来事は何かありましたか？```'
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              reasoning:
+                type: string
+              status:
+                type: string
+            required:
+            - status
+            - reasoning
+            type: object
+        structured_output_enabled: false
+        title: 代替質問生成
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+          enabled: false
+      height: 155
+      id: '17551658398830'
+      position:
+        x: 7317
+        y: 1201.5
+      positionAbsolute:
+        x: 7317
+        y: 1201.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#17551658398830.text#}}'
+        desc: ''
+        selected: false
+        title: 代替質問応答
+        type: answer
+        variables: []
+      height: 105
+      id: '17551660070480'
+      position:
+        x: 7651
+        y: 1244.5
+      positionAbsolute:
+        x: 7651
+        y: 1244.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        error_strategy: fail-branch
+        memory:
+          query_prompt_template: "# あなたが利用できる情報（コンテキスト）\n\n- ユーザーの入力：{{#sys.query#}}\n\
+            - なぜ次の質問が必要かの理由（プロファイル完成度チェック時の自己分析）: {{#17550661175780.structured_output.reasoning#}}\n\
+            - ユーザーの協力的な最新の応答の要約: {{#17551596791270.structured_output.summary#}}\n\
+            - 現在のワーキングメモリの状態（空の場合もあります）: {{#conversation.memory#}}\n- これが、ユーザーから受け取った最新のリクエスト情報です。\n\
+            \  - ユーザーリクエスト: {{#17555998217170.requests_context#}}\n- 参考までに、これがユーザー自身のプロフィールです。\n\
+            \  - ユーザープロフィール: {{#17555998217170.profile_context#}}"
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 4447a6dc-5818-47ff-9b4d-a64792e4e8dc
+          role: system
+          text: '# あなたの役割（アイデンティティ）
+
+
+            あなたは、ユーザーの言葉に深く共感し、その人の内面にある素晴らしいビジョンや情熱を引き出すのが得意な、超一流のインタビュアーです。'
+        - id: 58624808-3673-4fac-8fc8-95d7e6fc9c70
+          role: user
+          text: '# あなたの厳密なタスク
+
+            あなたの役割は、コンテキストを分析し、ユーザープロファイルを完成させるために、**次に聞くべき最も重要で、かつ温かみのある質問を1つだけ**生成することです。
+
+
+            ## 質問生成のルール
+
+            1.  **肯定と共感から始める:** ユーザーの協力的な応答に心からの感謝と興味を示してください。（例：「〇〇というお考え、とても素敵ですね！」）
+
+            2.  **思考プロセスを翻訳する:** `reasoning`で示唆されている「次に聞くべきこと」について、自然な会話の流れで質問してください。
+
+            3.  **相手の可能性を引き出す聞き方をする:** ポジティブで未来志向の質問を心がけてください。
+
+            4.  出力は、ユーザーに問いかける質問文そのものだけにしてください。
+
+
+            ## 応答のパーソナライズに関するルール
+
+            - もし「ユーザーの名前」が判明している場合は、応答の冒頭で「〇〇さん、」と自然に呼びかけることから始めてください。
+
+            - ただし、不自然にならないよう、毎回必ず呼びかける必要はありません。文脈に応じて、最も人間らしいコミュニケーションを選択してください。'
+        - id: 8fe09b2d-c8de-4437-ae80-8e1bd55fceab
+          role: assistant
+          text: '# 出力例（reasoningが「価値観が不明確」だった場合）
+
+            素晴らしいビジョンですね！お話を聞いているだけで、こちらまでワクワクしてきます。
+
+            もしよろしければ次に、あなたがそのビジョンを実現する上で「これだけは譲れない」と考えている信条や、大切にしている価値観について教えていただけますか？'
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              reasoning:
+                type: string
+              status:
+                type: string
+            required:
+            - status
+            - reasoning
+            type: object
+        structured_output_enabled: false
+        title: 深掘り質問生成
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+          enabled: false
+      height: 155
+      id: '17551660546480'
+      position:
+        x: 6983
+        y: 1013.5
+      positionAbsolute:
+        x: 6983
+        y: 1013.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        default_value:
+        - key: text
+          type: string
+          value: ''
+        desc: ''
+        error_strategy: default-value
+        memory:
+          query_prompt_template: "# あなたが利用できる情報（コンテキスト）\n- ユーザーの入力：{{#sys.query#}}\n\
+            - これが、現在のワーキングメモリの状態です。次にどの情報を得るべきかを判断するための、最も重要な手がかりです。\n- これは、情報を含まなかった、ユーザーの直近の応答です。\n\
+            \  - ユーザーの応答の要約: {{#17551596791270.structured_output.summary#}}\n- これが、ユーザーから受け取った最新のリクエスト情報です。\n\
+            \  - ユーザーリクエスト: {{#17555998217170.requests_context#}}\n- 参考までに、これがユーザー自身のプロフィールです。\n\
+            \  - ユーザープロフィール: {{#17555998217170.profile_context#}}"
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 4447a6dc-5818-47ff-9b4d-a64792e4e8dc
+          role: system
+          text: '# あなたの役割（アイデンティティ）
+
+
+            あなたは、会話の流れを巧みにコントロールする、経験豊富なファシリテーターです。'
+        - id: 58624808-3673-4fac-8fc8-95d7e6fc9c70
+          role: user
+          text: "# あなたの厳密なタスク\n対話を本題に戻すための、**その状況に最もふさわしい、丁寧で温かみのある質問を1つだけ**生成してください。\n\
+            \n## 思考のステップ\n1.  ユーザーの応答（`summary`）に「ご確認ありがとうございます」のように軽く触れてください。\n\n\
+            2.  「現在のワーキングメモリ」を分析し、対話の現在地と次に達成すべき目標を特定します。\n    - **Case A: `name`がまだない場合**\
+            \ → 次の目標は「名前を聞くこと」です。\n    - **Case B: `profile`が未完成の場合** → 次の目標は「プロフィール項目（例：role,\
+            \ core_vision）を埋めること」です。\n    - **Case C: `profile`は完成したが、`requests`がまだない場合**\
+            \ → 次の目標は「会いたい人物像のヒアリングを開始すること」です。\n    - **Case D: `requests`のヒアリング中の場合**\
+            \ → 次の目標は「リクエストをさらに深掘りすること」です。\n\n3.  特定した目標に基づき、最も自然な質問を生成します。\n    -\
+            \ Case Aなら、「もしよろしければ、まずあなたのお名前から教えていただけますか？」\n    - Case Bなら、「〇〇さん、次にあなたのお仕事について教えていただけますか？」\n\
+            \    - Case Cなら、「ありがとうございます！それでは次に、〇〇さんが会ってみたい人物について、お話を聞かせてもらえますか？」\n\
+            \    - Case Dなら、「なるほど。その点について、もう少し詳しくお伺いしてもよろしいですか？」"
+        - id: 8fe09b2d-c8de-4437-ae80-8e1bd55fceab
+          role: assistant
+          text: '# 出力例（メモリに名前だけあり、ユーザーが「なるほど」と答えた場合）
+
+            ご確認ありがとうございます。
+
+            少しずつあなたのことが見えてくるようで、とても興味深いです。もしよろしければ、もう少しだけあなたの「今」について教えてください。現在、どのような会社で、どんな役割を担っていらっしゃるのでしょうか？'
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              reasoning:
+                type: string
+              status:
+                type: string
+            required:
+            - status
+            - reasoning
+            type: object
+        structured_output_enabled: false
+        title: 対話再誘導
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+          enabled: false
+      height: 155
+      id: '17551688288560'
+      position:
+        x: 7651
+        y: 1389.5
+      positionAbsolute:
+        x: 7651
+        y: 1389.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#17551688288560.text#}}'
+        desc: ''
+        selected: false
+        title: 対話再誘導応答
+        type: answer
+        variables: []
+      height: 105
+      id: '17551689386760'
+      position:
+        x: 7985
+        y: 1404
+      positionAbsolute:
+        x: 7985
+        y: 1404
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#17551660546480.text#}}'
+        desc: ''
+        selected: false
+        title: 深堀り質問応答
+        type: answer
+        variables: []
+      height: 105
+      id: '17551689434150'
+      position:
+        x: 7317
+        y: 1056.5
+      positionAbsolute:
+        x: 7317
+        y: 1056.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '申し訳ありません、現在システムで一時的な問題が発生したようです。
+
+
+          大変お手数ですが、少し時間をおいてから、もう一度メッセージを送信していただけますでしょうか。'
+        desc: ''
+        selected: false
+        title: 汎用エラー応答
+        type: answer
+        variables: []
+      height: 166
+      id: '1755214503739'
+      position:
+        x: 7317
+        y: 2331
+      positionAbsolute:
+        x: 7317
+        y: 2331
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(current_memory: list) -> dict:\n    try:\n\
+          \        if isinstance(current_memory, list) and len(current_memory) > 0:\n\
+          \            memory_object = current_memory[0]\n        elif isinstance(current_memory,\
+          \ dict):\n            memory_object = current_memory\n        else:\n  \
+          \          memory_object = {}\n\n        if \"interaction_state\" not in\
+          \ memory_object:\n            memory_object[\"interaction_state\"] = {}\n\
+          \        \n        memory_object[\"interaction_state\"][\"phase\"] = \"\
+          request_hearing\"\n        \n        # ★★★ ここが重要 ★★★\n        # 更新したオブジェクトを、配列でラップして返す\n\
+          \        return {\n            \"updated_memory_output\": [memory_object]\n\
+          \        }\n\n    except Exception as e:\n        return { \"error\": str(e)\
+          \ }"
+        code_language: python3
+        desc: ''
+        outputs:
+          updated_memory_output:
+            children: null
+            type: array[object]
+        selected: false
+        title: 会話フェーズを更新
+        type: code
+        variables:
+        - value_selector:
+          - conversation
+          - memory
+          value_type: array[object]
+          variable: current_memory
+      height: 54
+      id: '1755253097776'
+      position:
+        x: 6983
+        y: 528
+      positionAbsolute:
+        x: 6983
+        y: 528
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        items:
+        - input_type: variable
+          operation: over-write
+          value:
+          - '1755253097776'
+          - updated_memory_output
+          variable_selector:
+          - conversation
+          - memory
+          write_mode: over-write
+        selected: false
+        title: 更新済みメモリを保存
+        type: assigner
+        version: '2'
+      height: 86
+      id: '1755253253995'
+      position:
+        x: 7317
+        y: 530
+      positionAbsolute:
+        x: 7317
+        y: 530
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: "# あなたが利用できる情報（コンテキスト）\n- これが**更新前**のプロフィール情報です。空（{}）の場合は、これが最初の情報入力です。\n\
+            \  - 前回のプロフィール情報:{{#conversation.memory#}}\n- これが、ユーザーから提供された**新しい情報**です。\n\
+            \  - ユーザーの最新メッセージ: {{#sys.query#}}"
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: c99691e0-c192-4f14-8caa-3ea897c01bea
+          role: system
+          text: '# あなたの役割（アイデンティティ）
+
+            あなたは、ユーザーが会いたい人物像（リクエスト）を、対話を通じて具体化し、構造化されたJSONデータに変換する、専門のリクエストアナリストです。'
+        - id: 5476fec1-333c-4236-a6ca-9c135097f7bb
+          role: user
+          text: "    # あなたの厳密なタスク\n    ユーザーの最新メッセージを分析し、「会いたい人物像」に関する情報を、以下のJSONスキーマに従って抽出・構造化してください。\n\
+            \    - ユーザーの言葉から、具体的なスキル、役割、価値観などを推論し、適切なキーに割り当ててください。\n    - 出力は、生のJSONオブジェクトのみでなければなりません。"
+        - id: 13387976-3250-48f3-9619-8306c8dd42cd
+          role: assistant
+          text: "#### **シナリオ1：技術的な相談相手を探している**\n\n*   **ユーザーのメッセージ:**\n    > `そうですね、私のこの「出会いのサイエンス」というアイデアを、技術的にどう実現できるか相談できる人が欲しいです。特に、AIやLLMを使ったアプリ開発の経験が豊富なエンジニアの方と、一度壁打ちしてみたいですね。`\n\
+            \n*   **AIが出力すべきJSON（お手本）:**\n    ```json\n    {\n      \"needs\": [\n\
+            \        \"技術的な相談相手\",\n        \"壁打ち相手\"\n      ],\n      \"must_have_skills\"\
+            : [\n        \"AI\",\n        \"LLM\",\n        \"アプリ開発\"\n      ],\n\
+            \      \"should_have_roles\": [\n        \"エンジニア\"\n      ],\n      \"\
+            qualitative_traits\": [\n        \"豊富な経験\"\n      ]\n    }\n    ```\n\n\
+            ---\n\n#### **シナリオ2：事業の方向性について相談したい**\n\n*   **ユーザーのメッセージ:**\n    > `プロダクトのアイデアはあるんですが、これが本当にビジネスとして成り立つのか、自信がなくて。同じようなSaaS業界で、ゼロから事業を立ち上げた経験のある起業家の方に、メンターになってもらえたら最高です。`\n\
+            \n*   **AIが出力すべきJSON（お手本）:**\n    ```json\n    {\n      \"needs\": [\n\
+            \        \"メンター\",\n        \"事業相談\"\n      ],\n      \"must_have_skills\"\
+            : [\n        \"SaaS事業の立ち上げ\"\n      ],\n      \"should_have_roles\": [\n\
+            \        \"起業家\",\n        \"創業者\"\n      ],\n      \"qualitative_traits\"\
+            : [\n        \"ゼロイチの経験\"\n      ]\n    }\n    ```\n---\n\n#### **シナリオ3：価値観の合う仲間を探している**\n\
+            \n*   **ユーザーのメッセージ:**\n    > `スキルも大事ですが、それ以上に「テクノロジーで社会を良くしたい」という同じ志を持っている人と繋がりたいです。職種は問いませんが、挑戦的なマインドを持っている人がいいですね。`\n\
+            \n*   **AIが出力すべきJSON（お手本）:**\n    ```json\n    {\n      \"needs\": [\n\
+            \        \"仲間探し\"\n      ],\n      \"must_have_skills\": [],\n      \"\
+            should_have_roles\": [],\n      \"qualitative_traits\": [\n        \"\
+            同じ志を持つ\",\n        \"社会を良くしたい\",\n        \"挑戦的なマインド\"\n      ]\n    }"
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              must_have_skills:
+                description: 会いたい相手が『必ず』持っているべき専門的なスキルや知識（例：AI, LLM, UXデザイン, SaaS事業開発,
+                  資金調達）
+                items:
+                  type: string
+                type: array
+              needs:
+                description: ユーザーが必要としている助けの種類や関係性（例：メンター、壁打ち相手、共同創業者、アドバイザー、投資家）
+                items:
+                  type: string
+                type: array
+              qualitative_traits:
+                description: 会いたい相手に求める、スキル以外の定性的な特性（価値観、性格、思想など）（例：同じ志を持つ, 挑戦的, 実務経験が豊富）
+                items:
+                  type: string
+                type: array
+              should_have_roles:
+                description: 会いたい相手が経験していると『望ましい』役割や経歴（例：創業者, エンジニア, 投資家, プロダクトマネージャー）
+                items:
+                  type: string
+                type: array
+            required: []
+            type: object
+        structured_output_enabled: true
+        title: リクエスト抽出
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+          enabled: false
+      height: 119
+      id: '17555693082030'
+      position:
+        x: 4979
+        y: 896.5
+      positionAbsolute:
+        x: 4979
+        y: 896.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\nimport datetime\n\n# Difyの変数設定で定義された 'arg1' と 'current_memory'\
+          \ を引数として直接受け取ります。\ndef main(arg1: str, current_memory: list) -> dict:\n\
+          \    \"\"\"\n    現在のワーキングメモリ(current_memory)と、新しいリクエスト情報(arg1)を受け取り、\n \
+          \   requestsセクションに新しいリクエストを追加して、更新後のメモリを返す。\n    \"\"\"\n    try:\n    \
+          \    # --- 修正点 1: 正しい変数(arg1)からJSON文字列を読み込み、オブジェクトに変換 ---\n        llm_output_str\
+          \ = arg1\n        new_request_obj = {}\n        # LLM出力に含まれる可能性があるマークダウンを除去して安全にパース\n\
+          \        start_index = llm_output_str.find('{')\n        end_index = llm_output_str.rfind('}')\
+          \ + 1\n        if start_index != -1 and end_index != 0:\n            json_str\
+          \ = llm_output_str[start_index:end_index]\n            new_request_obj =\
+          \ json.loads(json_str)\n\n        # --- 修正点 2: 正しい変数(current_memory)から既存のメモリを読み込む\
+          \ ---\n        if isinstance(current_memory, list) and len(current_memory)\
+          \ > 0:\n            updated_memory = current_memory[0]\n        else:\n\
+          \            # メモリが空の場合の初期化\n            updated_memory = {}\n\n       \
+          \ # requestsキーが存在しない場合に備えて初期化\n        if \"requests\" not in updated_memory:\n\
+          \            updated_memory[\"requests\"] = {}\n        \n        # 新しいリクエストIDを生成\n\
+          \        new_request_id = f\"req_{len(updated_memory.get('requests', {}))\
+          \ + 1:03d}\"\n\n        # 新しいリクエストオブジェクトを構築\n        new_request = {\n \
+          \           \"id\": new_request_id,\n            \"status\": \"Active\"\
+          ,\n            \"timestamp\": datetime.datetime.utcnow().isoformat() + \"\
+          Z\",\n            \"structured_query\": new_request_obj # ここにパースしたオブジェクトが入る\n\
+          \        }\n\n        # ワーキングメモリのrequestsセクションに、新しいリクエストを追加\n        updated_memory[\"\
+          requests\"][new_request_id] = new_request\n        \n        # 更新したオブジェクトを配列でラップして返す\n\
+          \        return {\n            \"final_memory_output\": [updated_memory]\n\
+          \        }\n\n    except Exception as e:\n        return { \"error\": f\"\
+          An error occurred: {str(e)}\" }"
+        code_language: python3
+        desc: ''
+        outputs:
+          final_memory_output:
+            children: null
+            type: array[object]
+        selected: false
+        title: JSON -> オブジェクト変換
+        type: code
+        variables:
+        - value_selector:
+          - '17555693082030'
+          - text
+          value_type: string
+          variable: arg1
+        - value_selector:
+          - conversation
+          - memory
+          value_type: array[object]
+          variable: current_memory
+      height: 54
+      id: '17555701360760'
+      position:
+        x: 5313
+        y: 932.5
+      positionAbsolute:
+        x: 5313
+        y: 932.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        items:
+        - input_type: variable
+          operation: over-write
+          value:
+          - '17555701360760'
+          - final_memory_output
+          variable_selector:
+          - conversation
+          - memory
+          write_mode: over-write
+        selected: false
+        title: 更新済みメモリ保存
+        type: assigner
+        version: '2'
+      height: 86
+      id: '17555702366390'
+      position:
+        x: 5647
+        y: 896.5
+      positionAbsolute:
+        x: 5647
+        y: 896.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        author: Dify
+        desc: ''
+        height: 558
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"🎯
+          やりたいこと（ゴール）","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":1,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"ユーザーが話す順番に依存せず","type":"text","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"、エージェントが常に「今何を聞くべきか」を正しく判断できるようにする。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"textFormat":1,"value":1},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"特に「プロフィール入力の途中で、いきなりリクエストを話し始める」ケースでも、自然に会話を誘導できるようにしたい。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":2},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"結果として、","type":"text","version":1},{"detail":0,"format":1,"mode":"normal","style":"","text":"融通の効くプロファイリングプロセス","type":"text","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"を実現し、対話全体の自然さと精度を高める。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":3}],"direction":"ltr","format":"","indent":0,"type":"list","version":1,"listType":"bullet","start":1,"tag":"ul"},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"🛠️
+          やること（具体的ステップ）","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":1,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"Step
+          1: 「2. 思考と判断」ノードのアップグレード","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":1,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"これまでの「次に取るアクションを決める」役割に加えて、","type":"text","version":1},{"detail":0,"format":1,"mode":"normal","style":"","text":"ユーザー発言のトピック分類","type":"text","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"を行う。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":1},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"トピックは最低限2つに分類：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":2},{"children":[{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"PROFILING
+          = 自分自身の話（プロフィール情報）","type":"text","version":1}],"direction":"ltr","format":"","indent":1,"type":"listitem","version":1,"value":1},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"REQUEST
+          = 会いたい人物や希望の話","type":"text","version":1}],"direction":"ltr","format":"","indent":1,"type":"listitem","version":1,"value":2}],"direction":"ltr","format":"","indent":0,"type":"list","version":1,"listType":"bullet","start":1,"tag":"ul"}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":3},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"topic
+          を判定した上で、phase と組み合わせて next_action を決定する新ルールを導入。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":3},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"特に、phase
+          = profiling なのに topic = REQUEST の場合は、","type":"text","version":1},{"detail":0,"format":1,"mode":"normal","style":"","text":"GUIDE_TO_PROFILING","type":"text","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"
+          という新アクションを返す。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":4}],"direction":"ltr","format":"","indent":0,"type":"list","version":1,"listType":"bullet","start":1,"tag":"ul"},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"Step
+          2: 「3. アクション分岐」に新しいルートを追加","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":1,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"既存の
+          UPDATE_MEMORY / PROCESS_REQUEST / ANALYZE_RESPONSE_INTENT に加え、","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":1},{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"IF
+          next_action = GUIDE_TO_PROFILING → 新しい誘導フローへ","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"textFormat":1,"value":2}],"direction":"ltr","format":"","indent":0,"type":"list","version":1,"textFormat":1,"listType":"bullet","start":1,"tag":"ul"},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"Step
+          3: 「対話誘導」ノードの新設","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":1,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"ユーザーのリクエストを一旦受け止めつつ、優しくプロフィール入力に戻すメッセージを生成。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":1},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"例:","type":"text","version":1},{"type":"linebreak","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"「AIエンジニアの方と会いたい」とのこと、承知しました！その出会いを実現するために、まず、あなたご自身のことを少しだけ教えていただけますか？","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":2}],"direction":"ltr","format":"","indent":0,"type":"list","version":1,"listType":"bullet","start":1,"tag":"ul"},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"✅
+          この改修の効果","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":1,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"ユーザーがどの順番で話しても、AIが「今の発言はプロフィールなのかリクエストなのか」を理解できる。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":1},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"会話を自然にプロファイリングに誘導でき、","type":"text","version":1},{"detail":0,"format":1,"mode":"normal","style":"","text":"ワークフローが崩壊しなくなる","type":"text","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":2},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"エージェントが会話の主導権を握り続け、より自然で賢い対話が実現できる。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"listitem","version":1,"value":3}],"direction":"ltr","format":"","indent":0,"type":"list","version":1,"listType":"bullet","start":1,"tag":"ul"},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"まとめると、","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"👉
+          「順番が違う入力」にも対応できるように、","type":"text","version":1},{"detail":0,"format":1,"mode":"normal","style":"","text":"思考ノードでトピック分類
+          → 新アクションGUIDE_TO_PROFILING → 誘導メッセージ生成","type":"text","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"という流れを組み込むのが今回の改修です。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"この整理で進めていけば、設計と実装が一気にクリアになると思います！","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"このあと、実装のための
+          ","type":"text","version":1},{"detail":0,"format":1,"mode":"normal","style":"","text":"具体的なプロンプト設計例","type":"text","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"
+          をさらに深掘りしていきましょうか？","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 560
+      height: 558
+      id: '1755570404778'
+      position:
+        x: 678.4826595470287
+        y: 2196.244444991803
+      positionAbsolute:
+        x: 678.4826595470287
+        y: 2196.244444991803
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 560
+    - data:
+        answer: '承知いたしました。お話をまとめさせていただきますね。
+
+
+          {{#17555693082030.structured_output.must_have_skills#}}などのスキルを持ち、{{#17555693082030.structured_output.should_have_roles#}}のご経験がある、{{#17555693082030.structured_output.needs#}}を探していらっしゃるのですね。
+
+
+          ただいま、私のネットワークの中から、そのご要望に最もマッチする方を探し始めます。最高の出会いをお届けできるよう、少しお時間をいただきますが、どうぞ楽しみにお待ちください！✨'
+        desc: ''
+        selected: false
+        title: リクエスト受取完了応答
+        type: answer
+        variables: []
+      height: 302
+      id: '17555706503860'
+      position:
+        x: 7651
+        y: 828.5
+      positionAbsolute:
+        x: 7651
+        y: 828.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        error_strategy: fail-branch
+        memory:
+          query_prompt_template: "# あなたが利用できる情報（コンテキスト）\n- ユーザーの最新メッセージ: {{#sys.query#}}\n\
+            - あなた自身の思考プロセス: \n{{#17550600850210.structured_output.thinking_process#}}"
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 4447a6dc-5818-47ff-9b4d-a64792e4e8dc
+          role: system
+          text: '# あなたの役割（アイデンティティ）
+
+            あなたは、ユーザーとの会話の目的を見失わず、常に心地よい対話の流れを維持するのが得意な、経験豊富なコミュニケーション・ナビゲーターです。'
+        - id: 58624808-3673-4fac-8fc8-95d7e6fc9c70
+          role: user
+          text: '# あなたの厳密なタスク
+
+            あなたの唯一のタスクは、**ユーザーの「会いたい」という気持ちを一度受け止めた上で、「その素晴らしい出会いを実現するために、まずあなたのことを教えてください」と、優しく対話をプロファイリングに引き戻すメッセージを生成すること**です。
+
+
+            ## 応答生成のルール
+
+            1.  **共感と肯定:** まず、ユーザーが話してくれた「会いたい人」の内容（`sys.query`）を肯定的に要約し、そのリクエストが素晴らしいものであることを伝えてください。
+
+            2.  **目的の提示:** 次に、「最高の出会いを見つけるためには、まずあなたご自身のことを深く理解することが不可欠です」というように、なぜプロファイリングが必要なのか、その理由を丁寧に説明してください。
+
+            3.  **具体的な行動喚起:** 最後に、プロファイリングを開始するための、具体的で答えやすい最初の質問（例：名前や仕事について）を投げかけてください。
+
+            4.  出力は、ユーザーに語りかける、自然で温かみのある応答メッセージそのものだけにしてください。
+
+
+            ## 応答のパーソナライズに関するルール
+
+            - もし「ユーザーの名前」が判明している場合は、応答の冒頭で「〇〇さん、」と自然に呼びかけることから始めてください。
+
+            - ただし、不自然にならないよう、毎回必ず呼びかける必要はありません。文脈に応じて、最も人間らしいコミュニケーションを選択してください。'
+        - id: 8fe09b2d-c8de-4437-ae80-8e1bd55fceab
+          role: assistant
+          text: '# 出力例
+
+            「AIエンジニアの方と会いたい」とのこと、承知いたしました！素晴らしい目標ですね。その実現に向けて、全力でお手伝いさせてください。
+
+
+            あなたにとって最高の出会いを創出するために、まず、あなたご自身のことをもう少しだけ教えていただけますでしょうか。
+
+
+            お名前や、現在どのようなお仕事をされているかなど、簡単な自己紹介からお伺いしてもよろしいですか？'
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              intent:
+                type: string
+              summary:
+                type: string
+            required:
+            - intent
+            - summary
+            type: object
+        structured_output_enabled: false
+        title: 対話誘導メッセージ生成
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+          enabled: false
+      height: 155
+      id: '17555754302730'
+      position:
+        x: 5647
+        y: 1491.5
+      positionAbsolute:
+        x: 5647
+        y: 1491.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#17555754302730.text#}}'
+        desc: ''
+        selected: false
+        title: 対話誘導応答
+        type: answer
+        variables: []
+      height: 105
+      id: '17555756807370'
+      position:
+        x: 5981
+        y: 1533
+      positionAbsolute:
+        x: 5981
+        y: 1533
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        items:
+        - input_type: variable
+          operation: over-write
+          value:
+          - '17550600850210'
+          - structured_output
+          - captured_request
+          variable_selector:
+          - conversation
+          - captured_request_cache
+          write_mode: over-write
+        - input_type: variable
+          operation: over-write
+          value:
+          - '17550600850210'
+          - structured_output
+          - captured_profile_info
+          variable_selector:
+          - conversation
+          - captured_profile_cache
+          write_mode: over-write
+        selected: false
+        title: リクエストを一時保存
+        type: assigner
+        version: '2'
+      height: 112
+      id: '1755576682837'
+      position:
+        x: 5313
+        y: 1533
+      positionAbsolute:
+        x: 5313
+        y: 1533
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        error_strategy: fail-branch
+        memory:
+          query_prompt_template: "# あなたが利用できる情報（コンテキスト）\n- ユーザーの最新メッセージ: {{#sys.query#}}\n\
+            - これは、ユーザーがプロファイリング中に、先行して話してくれた「会いたい人」に関する情報のキャッシュです。空の場合もあります。: {{#conversation.captured_request_cache#}}\n\
+            \n- これが、ユーザーから受け取った最新のリクエスト情報です。\n  - ユーザーリクエスト: {{#17555998217170.requests_context#}}\n\
+            - 参考までに、これがユーザー自身のプロフィールです。\n  - ユーザープロフィール: {{#17555998217170.profile_context#}}"
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 4447a6dc-5818-47ff-9b4d-a64792e4e8dc
+          role: system
+          text: '# あなたの役割（アイデンティティ）
+
+            あなたは、プロファイリングの完了をユーザーに伝え、次の対話フェ-ズである「リクエストヒアリング」へと、ユーザーを自然に、そして巧みに移行させる、経験豊富なコミュニケーション・ナビゲーターです。'
+        - id: 58624808-3673-4fac-8fc8-95d7e6fc9c70
+          role: user
+          text: "# あなたの厳密なタスク\nあなたの唯一のタスクは、コンテキストを分析し、**状況に応じた最適な応答メッセージを1つだけ生成すること**です。\n\
+            \n## 応答生成の絶対的なルール\n1.  **もし`先行リクエストのキャッシュ`に具体的な内容が含まれている場合:**\n    - **ステップ1:**\
+            \ まず、「ありがとうございます。あなたへの理解が深まり、プロフィールの作成が完了しました。」と伝えます。\n    - **ステップ2:**\
+            \ 次に、「さて、お話の最初の方で 『{{#conversation.captured_request_cache#}}』とおっしゃっていましたが、」というように、**AIがその内容を覚えていたこと**を明確に示してください。\n\
+            \    - **ステップ3:** 最後に、そのリクエストについて、より詳しく深掘りするための、具体的でオープンな質問を投げかけてください。\n\
+            \n2.  **もし`先行リクエストのキャッシュ`が空（null）の場合:**\n    - **ステップ1:** まず、「ありがとうございます。あなたへの理解が深まり、プロフィールの作成が完了しました。」と伝えます。\n\
+            \    - **ステップ2:** 次に、「つきましては、次にあなたが『具体的に会ってみたい』と感じる人物像について、お伺いしてもよろしいでしょうか？」と、**初めてリクエストを尋ねる**自然な質問をしてください。\n\
+            \n# 出力は、ユーザーに語りかける応答メッセージそのものだけにしてください。\n\n## 応答のパーソナライズに関するルール\n- もし「ユーザーの名前」が判明している場合は、応答の冒頭で「〇〇さん、」と自然に呼びかけることから始めてください。\n\
+            - ただし、不自然にならないよう、毎回必ず呼びかける必要はありません。文脈に応じて、最も人間らしいコミュニケーションを選択してください。"
+        - id: 8fe09b2d-c8de-4437-ae80-8e1bd55fceab
+          role: assistant
+          text: '# 出力例（先行リクエストのキャッシュがある場合）
+
+            ありがとうございます！あなたのお話を通じて、あなたのプロフィールと、その背景にあるビジョンについて深く理解することができました。
+
+
+            さて、お話の最初の方で「AIに詳しいシニアエンジニアと技術的な壁打ちがしたい」とおっしゃっていましたが、その点について、もう少しだけ詳しくお伺いしてもよろしいでしょうか？
+
+            例えば、そのエンジニアの方には、どのような経験や価値観を持っていると理想的だとお考えですか？
+
+
+
+            # 出力例（先行リクエストのキャッシュがない場合）
+
+            ありがとうございます！あなたのお話を通じて、あなたのプロフィールと、その背景にあるビジョンについて深く理解することができました。
+
+
+            この情報を元に、あなたにとって最高の出会いを創出する準備を進めていきます。
+
+
+            つきましては、次にあなたが「具体的に会ってみたい」と感じる人物像について、お伺いしてもよろしいでしょうか？'
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              intent:
+                type: string
+              summary:
+                type: string
+            required:
+            - intent
+            - summary
+            type: object
+        structured_output_enabled: false
+        title: 完了応答＆次ステップ移行
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+          enabled: false
+      height: 155
+      id: '17555772893160'
+      position:
+        x: 6649
+        y: 493.5
+      positionAbsolute:
+        x: 6649
+        y: 493.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: 552a347c-efe5-4f10-9018-b79385c13bb6
+            value: ''
+            varType: string
+            variable_selector:
+            - conversation
+            - captured_request_cache
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: キャッシュ存在チェック
+        type: if-else
+      height: 126
+      id: '1755581527444'
+      position:
+        x: 5313
+        y: 497
+      positionAbsolute:
+        x: 5313
+        y: 497
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: "# あなたが利用できる情報（コンテキスト）\n- ユーザーの最新メッセージ: {{#sys.query#}}\n\
+            - これが、ユーザーがプロファイリングの初期段階で話した、会いたい人物に関する発言のキャッシュです。\n  - ユーザーの発言キャッシュ:\
+            \ {{#conversation.captured_request_cache#}}\n- これは、現在完成しているユーザーのプロフィール情報です。リクエストを解釈する際の参考にしてください。\n\
+            \  - 完成済みプロフィール: {{#conversation.memory#}}"
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params: {}
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: c99691e0-c192-4f14-8caa-3ea897c01bea
+          role: system
+          text: '# あなたの役割（アイデンティティ）
+
+            あなたは、ユーザーが会いたい人物像（リクエスト）を、対話を通じて具体化し、構造化されたJSONデータに変換する、専門のリクエストアナリストです。'
+        - id: 5476fec1-333c-4236-a6ca-9c135097f7bb
+          role: user
+          text: '# あなたの厳密なタスク
+
+            **ユーザーの発言キャッシュ**を分析し、「会いたい人物像」に関する情報を、以下のJSONスキーマに従って抽出・構造化してください。
+
+            - ユーザーの言葉から、具体的なスキル、役割、価値観などを推論し、適切なキーに割り当ててください。
+
+            - 出力は、生のJSONオブジェクトのみでなければなりません。'
+        - id: 13387976-3250-48f3-9619-8306c8dd42cd
+          role: assistant
+          text: "#### **シナリオ：事業の方向性について相談したい**\n\n*   **ユーザーの発言キャッシュ:**\n    > `プロダクトのアイデアはあるんですが、これが本当にビジネスとして成り立つのか、自信がなくて。同じようなSaaS業界で、ゼロから事業を立ち上げた経験のある起業家の方に、メンターになってもらえたら最高です。`\n\
+            \n*   **AIが出力すべきJSON（お手本）:**\n    ```json\n    {\n      \"needs\": [\n\
+            \        \"メンター\",\n        \"事業相談\"\n      ],\n      \"must_have_skills\"\
+            : [\n        \"SaaS事業の立ち上げ\"\n      ],\n      \"should_have_roles\": [\n\
+            \        \"起業家\",\n        \"創業者\"\n      ],\n      \"qualitative_traits\"\
+            : [\n        \"ゼロイチの経験\"\n      ]\n    }\n    ```"
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              must_have_skills:
+                description: 会いたい相手が『必ず』持っているべき専門的なスキルや知識（例：AI, LLM, UXデザイン, SaaS事業開発,
+                  資金調達）
+                items:
+                  type: string
+                type: array
+              needs:
+                description: ユーザーが必要としている助けの種類や関係性（例：メンター、壁打ち相手、共同創業者、アドバイザー、投資家）
+                items:
+                  type: string
+                type: array
+              qualitative_traits:
+                description: 会いたい相手に求める、スキル以外の定性的な特性（価値観、性格、思想など）（例：同じ志を持つ, 挑戦的, 実務経験が豊富）
+                items:
+                  type: string
+                type: array
+              should_have_roles:
+                description: 会いたい相手が経験していると『望ましい』役割や経歴（例：創業者, エンジニア, 投資家, プロダクトマネージャー）
+                items:
+                  type: string
+                type: array
+            required: []
+            type: object
+        structured_output_enabled: true
+        title: キャッシュからリクエスト抽出
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+          enabled: false
+      height: 119
+      id: '17555816082210'
+      position:
+        x: 5981
+        y: 367.5
+      positionAbsolute:
+        x: 5981
+        y: 367.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\nimport datetime\n\ndef main(arg1: str, current_memory:\
+          \ list) -> dict:\n    try:\n        # --- LLM出力から新しいリクエスト情報をパース ---\n  \
+          \      llm_output_str = arg1\n        new_request_obj = {}\n        start_index\
+          \ = llm_output_str.find('{')\n        end_index = llm_output_str.rfind('}')\
+          \ + 1\n        if start_index != -1 and end_index != 0:\n            json_str\
+          \ = llm_output_str[start_index:end_index]\n            new_request_obj =\
+          \ json.loads(json_str)\n\n        # --- 現在のメモリをロード ---\n        if isinstance(current_memory,\
+          \ list) and len(current_memory) > 0:\n            updated_memory = current_memory[0]\n\
+          \        else:\n            updated_memory = {}\n\n        # --- ★★★ここからが修正箇所★★★\
+          \ ---\n        # 1. リクエストを追加\n        if \"requests\" not in updated_memory:\n\
+          \            updated_memory[\"requests\"] = {}\n        new_request_id =\
+          \ f\"req_{len(updated_memory.get('requests', {})) + 1:03d}\"\n        new_request\
+          \ = {\n            \"id\": new_request_id,\n            \"status\": \"Active\"\
+          ,\n            \"timestamp\": datetime.datetime.utcnow().isoformat() + \"\
+          Z\",\n            \"structured_query\": new_request_obj\n        }\n   \
+          \     updated_memory[\"requests\"][new_request_id] = new_request\n\n   \
+          \     # 2. 同時にフェーズも更新\n        if \"interaction_state\" not in updated_memory:\n\
+          \            updated_memory[\"interaction_state\"] = {}\n        updated_memory[\"\
+          interaction_state\"][\"phase\"] = \"request_hearing\"\n        # --- ★★★修正箇所ここまで★★★\
+          \ ---\n\n        # 最終的なオブジェクトを配列でラップして返す\n        return {\n           \
+          \ \"final_memory_output\": [updated_memory]\n        }\n\n    except Exception\
+          \ as e:\n        return { \"error\": f\"An error occurred: {str(e)}\" }"
+        code_language: python3
+        desc: ''
+        outputs:
+          final_memory_output:
+            children: null
+            type: array[object]
+        selected: false
+        title: 5c. リクエスト追加＆フェーズ更新
+        type: code
+        variables:
+        - value_selector:
+          - '17555816082210'
+          - text
+          value_type: string
+          variable: arg1
+        - value_selector:
+          - conversation
+          - memory
+          value_type: array[object]
+          variable: current_memory
+      height: 54
+      id: '1755583116426'
+      position:
+        x: 6315
+        y: 367.5
+      positionAbsolute:
+        x: 6315
+        y: 367.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        items:
+        - input_type: variable
+          operation: over-write
+          value:
+          - '1755583116426'
+          - final_memory_output
+          variable_selector:
+          - conversation
+          - memory
+          write_mode: over-write
+        selected: false
+        title: 更新済みメモリを保存
+        type: assigner
+        version: '2'
+      height: 86
+      id: '17555832109000'
+      position:
+        x: 6649
+        y: 367.5
+      positionAbsolute:
+        x: 6649
+        y: 367.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '承知いたしました。お話をまとめさせていただきますね。
+
+
+          {{#17555816082210.structured_output.must_have_skills#}}などのスキルを持ち、{{#17555816082210.structured_output.should_have_roles#}}のご経験がある、{{#17555816082210.structured_output.needs#}}を探していらっしゃるのですね。
+
+
+          ただいま、私のネットワークの中から、そのご要望に最もマッチする方を探し始めます。最高の出会いをお届けできるよう、少しお時間をいただきますが、どうぞ楽しみにお待ちください！✨'
+        desc: ''
+        selected: false
+        title: リクエスト受取完了回答
+        type: answer
+        variables: []
+      height: 302
+      id: '17555832835340'
+      position:
+        x: 8653
+        y: 397.5
+      positionAbsolute:
+        x: 8653
+        y: 397.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '# あなたが利用できる情報（コンテキスト）
+
+            - 現在のワーキングメモリ: {{#conversation.memory#}}
+
+            - ユーザーの最新メッセージ: {{#sys.query#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 02249eb7-6bb4-4361-ab19-e1bbfa587f6f
+          role: system
+          text: '# あなたの役割（アイデンティティ）
+
+            あなたは、ユーザーの最初の発言を分析し、その対話の目的や意図を瞬時に見抜く、高度な自然言語理解（NLU）エンジンです。あなたの仕事は、後続のAIエージェントが最適な応答戦略を選択できるよう、最初の入力を的確に分類することです。'
+        - id: 84964e32-1c7a-47df-b231-3597464fe44a
+          role: user
+          text: "# あなたの厳密なタスク\nあなたの唯一のタスクは、以下のルールに**厳密に**従って、ユーザーの意図を判断することです。あなたの出力は、「intent」と「summary」の2つのキーを持つJSONオブジェクトでなければなりません。\n\
+            \n## 思考のステップ\n1.  **メモリを確認する:** まず、ワーキングメモリに`profile.static_info.name`が存在するかどうかを確認します。\n\
+            \    - **もし名前が既に存在する場合:** ユーザーは自己紹介済みです。後続のルールに従い、`intent`を`CONCRETE_INTRODUCTION`か`AMBIGUOUS_CONSULTATION`に分類してください。\n\
+            \    - **もし名前がまだ存在しない場合:** これが最初の本格的な対話です。次のルールに進んでください。\n\n2.  **【最優先】具体的な情報が含まれているか？**\
+            \ ユーザーの最新メッセージに、**名前、会社名、役職、具体的な目標（「〇〇したい」）**といった、プロファイリングに直接使える具体的な情報が**一つでも含まれているか**を最優先で確認します。\n\
+            \    - **もし含まれている場合:** `intent`は必ず`CONCRETE_INTRODUCTION`になります。\n    -\
+            \ **もし含まれていない場合:** 次のルールに進んでください。\n\n3.  **【次に】漠然とした相談か？** ユーザーのメッセージが、「悩んでいる」「どうすればいいか」といった、感情や状態に関する情報が中心かを確認します。\n\
+            \    - **もしそうであれば:** `intent`は`AMBIGUOUS_CONSULTATION`になります。\n\n4.  **【最後に】それ以外の場合:**\
+            \ 上記のいずれにも当てはまらない、挨拶や相槌のみのメッセージの場合、`intent`は`NEED_TO_ASK_NAME`にしてください。\n\
+            \n## summaryのルール\n- ユーザーの発言の要点を、20文字以内で簡潔に要約してください。"
+        - id: 28b7d853-f77f-45d1-a74e-bcab51a75d09
+          role: assistant
+          text: '# 判断の具体例
+
+
+            ## 【具体的な情報あり → CONCRETE_INTRODUCTION】
+
+            ### ユーザーメッセージ: 「こんにちは、佐藤真理子です。」
+
+            { "intent": "CONCRETE_INTRODUCTION", "summary": "佐藤真理子と自己紹介" }
+
+            ### ユーザーメッセージ: 「株式会社プレーリーで働いています。」
+
+            { "intent": "CONCRETE_INTRODUCTION", "summary": "株式会社プレーリー勤務" }
+
+
+            ---
+
+
+            ## 【漠然とした相談 → AMBIGUOUS_CONSULTATION】
+
+            ### ユーザーメッセージ: 「キャリアに悩んでいて…」
+
+            { "intent": "AMBIGUOUS_CONSULTATION", "summary": "キャリアに関する漠然とした悩み" }
+
+
+            ---
+
+
+            ## 【上記以外 → NEED_TO_ASK_NAME】
+
+            ### ユーザーメッセージ: 「よろしくお願いします。」
+
+            { "intent": "NEED_TO_ASK_NAME", "summary": "挨拶のみ" }'
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              intent:
+                description: ユーザーの入力の意図。
+                enum:
+                - CONCRETE_INTRODUCTION
+                - AMBIGUOUS_CONSULTATION
+                - NEED_TO_ASK_NAME
+                type: string
+              summary:
+                description: ユーザーの入力の簡潔な要約。
+                type: string
+            required:
+            - intent
+            - summary
+            type: object
+        structured_output_enabled: true
+        title: 0. 初期意図分析
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1755583954150'
+      position:
+        x: 789
+        y: 1996.5
+      positionAbsolute:
+        x: 789
+        y: 1996.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 19e220aa-d4b8-4c18-a8be-0d8d897de6a4
+          conditions:
+          - comparison_operator: is
+            id: 374d3bdd-db83-48ee-8f99-38ea9c13e4ff
+            value: NEED_TO_ASK_NAME
+            varType: object
+            variable_selector:
+            - '1755583954150'
+            - structured_output
+            - intent
+          id: 19e220aa-d4b8-4c18-a8be-0d8d897de6a4
+          logical_operator: and
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: b10eeaae-ebab-4cd0-9289-9d1f585a9628
+            value: AMBIGUOUS_CONSULTATION
+            varType: object
+            variable_selector:
+            - '1755583954150'
+            - structured_output
+            - intent
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 大分岐
+        type: if-else
+      height: 174
+      id: '1755584117347'
+      position:
+        x: 1123
+        y: 1996.5
+      positionAbsolute:
+        x: 1123
+        y: 1996.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '# あなたが利用できる情報（コンテキスト）
+
+            - ユーザーの最新メッセージ: {{#sys.query#}}
+
+            - 現在のワーキングメモリ: {{#conversation.memory#}}
+
+            - ユーザーの最初の発言の要約:{{#1755583954150.structured_output.summary#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: a26e6c2c-ab14-49f5-a1d5-b6cbab08d809
+          role: system
+          text: '# あなたの役割（アイデンティティ）
+
+            あなたは、相手の心の扉を優しく開くのが得意な、経験豊富なコーチング・カウンセラーです。あなたの仕事は、ユーザーが抱える漠然とした不安や悩みに深く共感し、それがネガティブなものではなく、素晴らしい「探求の始まり」であると気づかせることです。あなたの仕事は、ユーザーの最初の発言から、次に行うべき対話の「設計図」を瞬時に生成することです。'
+        - id: 6b43c29a-7dd8-405c-b57f-15b385548cdf
+          role: user
+          text: "# あなたの厳密なタスク\nあなたの唯一のタスクは、コンテキストを分析し、**「共感メッセージ」「探求のための質問」「役割の提案」**という3つの要素をすべて含んだ、構造化されたJSONオブジェクトを出力することです。\n\
+            \n## 各要素の生成ルール\n1.  **`empathy_message` (共感メッセージ):**\n    - ユーザーの悩みを肯定し、「素晴らしい探求の始まりですね」のようにポジティブに再定義（リフレーミング）する、短く温かいメッセージを生成してください。\n\
+            \n2.  **`exploration_question` (探求のための質問):**\n    - ユーザーが現実的な制約を忘れ、自由な発想ができるような、パワフルなオープンクエスチョンを生成してください。（例：「もし、何の制約もなかったとしたら…」）\n\
+            \n3.  **`role_suggestion` (役割の提案):**\n    - 上記の質問への応答を通じて、ユーザーの思考を整理する手伝いをしたい、という意図を伝えてください。\n\
+            \    - 「その答えを一緒に見つける『思考の壁打ち相手』として…」のように、AI自身の具体的な役割を提示してください。"
+        - id: 9201058e-fd44-4be1-a4fb-ad6cb9eead06
+          role: assistant
+          text: "{\n  \"empathy_message\": \"お話しいただき、ありがとうございます。ご自身のキャリアについて深く考える、その素晴らしい探求の旅が、今まさに始まろうとしているのですね。\"\
+            ,\n  \"exploration_question\": \"もし、お金や時間、他人の評価といった、あらゆる制約がなかったとしたら、今、あなたの心が最も惹かれるのはどのような挑戦ですか？\"\
+            ,\n  \"role_suggestion\": \"その答えを一緒に見つけるための「思考の壁打ち相手」として、まずはお手伝いさせていただけないでしょうか。\"\
+            \n}"
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              empathy_message:
+                description: ユーザーへの共感を示す、温かいメッセージ。
+                type: string
+              exploration_question:
+                description: ユーザーの内面を探るための、オープンな質問。
+                type: string
+              role_suggestion:
+                description: AIが担う役割の提案と、次のステップへの誘い。
+                type: string
+            required:
+            - empathy_message
+            - exploration_question
+            - role_suggestion
+            type: object
+        structured_output_enabled: true
+        title: P0-1. 共感と再定義
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1755584864069'
+      position:
+        x: 1882
+        y: 1866.5
+      positionAbsolute:
+        x: 1882
+        y: 1866.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1755584864069.structured_output.empathy_message#}}
+
+
+          {{#1755584864069.structured_output.exploration_question#}}
+
+
+          {{#1755584864069.structured_output.role_suggestion#}}
+
+
+          もしよろしければ、まずはこの質問に対するあなたの考えを、自由にお聞かせください。'
+        desc: ''
+        selected: false
+        title: P0-2. 応答と合意形成
+        type: answer
+        variables: []
+      height: 190
+      id: '1755585672345'
+      position:
+        x: 2216
+        y: 1859
+      positionAbsolute:
+        x: 2216
+        y: 1859
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 871141db-3846-47e3-8f43-9fa682066513
+          role: system
+          text: 'あなたは、相手の夢や目標に共感を示しつつ、自然な流れで自己紹介を促すことができる、コミュニケーションの達人です。
+
+            '
+        - id: 79017565-b859-4e23-a4e2-3bc855e78dfc
+          role: user
+          text: '# コンテキスト
+
+            - ユーザーが語ってくれた夢や目標: {{#sys.query#}}
+
+
+            # あなたのタスク
+
+            ユーザーが語ってくれた夢を肯定的に受け止めた上で、「その素晴らしいお話をもっと伺うために、まずあなたのお名前を教えていただけますか？」という、丁寧で自然な質問を生成してください。出力は質問文そのものだけにしてください。
+
+
+            # 出力例
+
+            素晴らしい夢ですね！地元で採れた食材を使ったカフェ、想像するだけで温かい気持ちになります。
+
+
+            その素敵なお話、ぜひもっと深くお伺いしたいです。もしよろしければ、まず、あなたのお名前から教えていただけますでしょうか？'
+        selected: false
+        title: 名前を尋ねる質問生成
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1755587098480'
+      position:
+        x: 5981
+        y: 1678
+      positionAbsolute:
+        x: 5981
+        y: 1678
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1755587098480.text#}}'
+        desc: ''
+        selected: false
+        title: 名前を尋ねる質問
+        type: answer
+        variables: []
+      height: 105
+      id: '1755587184420'
+      position:
+        x: 6315
+        y: 1638
+      positionAbsolute:
+        x: 6315
+        y: 1638
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: "# あなたが利用できる情報（コンテキスト）\n- ユーザーの最新メッセージ: {{#sys.query#}}\n\
+            - これが、ユーザーから受け取った最新のリクエスト情報です。\n  - ユーザーリクエスト:  {{#1755599442832.requests_context#}}\n\
+            - 参考までに、これがユーザー自身のプロフィールです。\n  - ユーザープロフィール: {{#1755599442832.profile_context#}}"
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 09ff833f-7074-4411-8b1e-54f2d7a140fc
+          role: system
+          text: '# あなたの役割（アイデンティティ）
+
+            あなたは、ユーザーのリクエスト（会いたい人物像）を分析し、その情報が具体的で、行動可能（Actionable）なレベルに達しているかを評価する、経験豊富なリクエストアナリストです。あなたの評価が、次の対話の質を決定します。'
+        - id: 4af57a25-021f-4eaf-9094-f8d859fc0fea
+          role: user
+          text: "# あなたの厳密なタスク\nユーザーリクエストを注意深く分析し、以下の評価基準に基づいて「完成度」を判断してください。あなたの出力は、「status」と「reasoning」の2つのキーを持つJSONオブジェクトでなければなりません。\n\
+            \n## 評価基準\n- **`REQUEST_COMPLETE`**: 以下の項目が、すべて具体的で明確な言葉で表現されている場合。\n\
+            \    1.  **WHAT (スキル/役割):** どのようなスキル、経験、役割を持っている人物か (`must_have_skills`,\
+            \ `should_have_roles`)。\n    2.  **WHY (目的/背景):** なぜその人物に会いたいのか。会って何を達成したいのか\
+            \ (`needs`)。\n    3.  **HOW (人物像/価値観):** どのような価値観や人間性を持っていると理想的か (`qualitative_traits`)。\n\
+            \n- **`NEED_MORE_DETAILS`**: 上記3つの基準のうち、1つでも曖昧な点や不足している情報がある場合。\n\n##\
+            \ reasoningのルール\n- `status`が`NEED_MORE_DETAILS`の場合、**具体的にどの項目（WHAT, WHY,\
+            \ HOW）について、どのような情報が不足しているのか**を簡潔に記述してください。これが、次の深掘り質問を生成するための重要なヒントになります。"
+        - id: 8c83f934-24bf-43f9-bdeb-4be3ab4f4fcd
+          role: assistant
+          text: "{\n  \"status\": \"NEED_MORE_DETAILS\",\n  \"reasoning\": \"WHY（目的）がまだ少し曖昧。ユーザーは『技術的な壁打ち相手』を求めているが、その壁打ちを通じて、具体的にどのような課題を解決したいのか、どのような意思決定をしたいのかが不明確。\"\
+            \n}"
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              reasoning:
+                description: そのステータスと判断した理由。特に、何が不足しているかの具体的な説明。
+                type: string
+              status:
+                description: リクエストの完成度ステータス。
+                enum:
+                - REQUEST_COMPLETE
+                - NEED_MORE_DETAILS
+                type: string
+            required:
+            - status
+            - reasoning
+            type: object
+        structured_output_enabled: true
+        title: 1a. リクエスト完成度チェック
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1755598782790'
+      position:
+        x: 7317
+        y: 367.5
+      positionAbsolute:
+        x: 7317
+        y: 367.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: "{{#sys.query#}}\n\n# あなたが利用できる情報（コンテキスト）\n- ユーザーの最新メッセージ:\
+            \ {{#sys.query#}}\n- これが、ユーザーから受け取った最新のリクエスト情報です。\n  - ユーザーリクエスト:  {{#17555996655750.requests_context#}}\n\
+            - 参考までに、これがユーザー自身のプロフィールです。\n  - ユーザープロフィール: {{#17555996655750.profile_context#}}"
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 09ff833f-7074-4411-8b1e-54f2d7a140fc
+          role: system
+          text: '# あなたの役割（アイデンティティ）
+
+            あなたは、ユーザーのリクエスト（会いたい人物像）を分析し、その情報が具体的で、行動可能（Actionable）なレベルに達しているかを評価する、経験豊富なリクエストアナリストです。あなたの評価が、次の対話の質を決定します。'
+        - id: 4af57a25-021f-4eaf-9094-f8d859fc0fea
+          role: user
+          text: "# あなたの厳密なタスク\nユーザーリクエストを注意深く分析し、以下の評価基準に基づいて「完成度」を判断してください。あなたの出力は、「status」と「reasoning」の2つのキーを持つJSONオブジェクトでなければなりません。\n\
+            \n## 評価基準\n- **`REQUEST_COMPLETE`**: 以下の項目が、すべて具体的で明確な言葉で表現されている場合。\n\
+            \    1.  **WHAT (スキル/役割):** どのようなスキル、経験、役割を持っている人物か (`must_have_skills`,\
+            \ `should_have_roles`)。\n    2.  **WHY (目的/背景):** なぜその人物に会いたいのか。会って何を達成したいのか\
+            \ (`needs`)。\n    3.  **HOW (人物像/価値観):** どのような価値観や人間性を持っていると理想的か (`qualitative_traits`)。\n\
+            \n- **`NEED_MORE_DETAILS`**: 上記3つの基準のうち、1つでも曖昧な点や不足している情報がある場合。\n\n##\
+            \ reasoningのルール\n- `status`が`NEED_MORE_DETAILS`の場合、**具体的にどの項目（WHAT, WHY,\
+            \ HOW）について、どのような情報が不足しているのか**を簡潔に記述してください。これが、次の深掘り質問を生成するための重要なヒントになります。"
+        - id: 8c83f934-24bf-43f9-bdeb-4be3ab4f4fcd
+          role: assistant
+          text: "{\n  \"status\": \"NEED_MORE_DETAILS\",\n  \"reasoning\": \"WHY（目的）がまだ少し曖昧。ユーザーは『技術的な壁打ち相手』を求めているが、その壁打ちを通じて、具体的にどのような課題を解決したいのか、どのような意思決定をしたいのかが不明確。\"\
+            \n}"
+        selected: false
+        structured_output:
+          schema:
+            properties:
+              reasoning:
+                description: そのステータスと判断した理由。特に、何が不足しているかの具体的な説明。
+                type: string
+              status:
+                description: リクエストの完成度ステータス。
+                enum:
+                - REQUEST_COMPLETE
+                - NEED_MORE_DETAILS
+                type: string
+            required:
+            - status
+            - reasoning
+            type: object
+        structured_output_enabled: true
+        title: 1a. リクエスト完成度チェック (1)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '17555989086750'
+      position:
+        x: 6315
+        y: 878.5
+      positionAbsolute:
+        x: 6315
+        y: 878.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: 61060d6c-a040-4d73-846e-e3f3ef2e75d1
+            value: NEED_MORE_DETAILS
+            varType: object
+            variable_selector:
+            - '17555989086750'
+            - structured_output
+            - status
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 1b. 深掘り分岐
+        type: if-else
+      height: 126
+      id: '1755599062653'
+      position:
+        x: 6649
+        y: 876.5
+      positionAbsolute:
+        x: 6649
+        y: 876.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: contains
+            id: 61060d6c-a040-4d73-846e-e3f3ef2e75d1
+            value: NEED_MORE_DETAILS
+            varType: string
+            variable_selector:
+            - '1755598782790'
+            - structured_output
+            - status
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 1b. 深掘り分岐
+        type: if-else
+      height: 126
+      id: '17555991306140'
+      position:
+        x: 7651
+        y: 367.5
+      positionAbsolute:
+        x: 7651
+        y: 367.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(memory: list) -> dict:\n    \"\"\"\n    Difyのmemory変数(Array[Object])から、\n\
+          \    profileとrequestsを抽出し、JSON文字列として出力する。\n    \"\"\"\n    try:\n      \
+          \  # 配列の最初の要素を取得\n        if isinstance(memory, list) and len(memory) >\
+          \ 0:\n            memory_obj = memory[0]\n        else:\n            memory_obj\
+          \ = {}\n\n        # 必要な情報を抽出\n        profile_str = json.dumps(memory_obj.get(\"\
+          profile\", {}), ensure_ascii=False, indent=2)\n        requests_str = json.dumps(memory_obj.get(\"\
+          requests\", {}), ensure_ascii=False, indent=2)\n\n        return {\n   \
+          \         \"profile_context\": profile_str,\n            \"requests_context\"\
+          : requests_str\n        }\n    except Exception as e:\n        return {\
+          \ \"error\": str(e) }"
+        code_language: python3
+        desc: ''
+        outputs:
+          profile_context:
+            children: null
+            type: string
+          requests_context:
+            children: null
+            type: string
+        selected: false
+        title: コンテキスト整形 A
+        type: code
+        variables:
+        - value_selector:
+          - conversation
+          - memory
+          value_type: array[object]
+          variable: memory
+      height: 54
+      id: '1755599442832'
+      position:
+        x: 6983
+        y: 367.5
+      positionAbsolute:
+        x: 6983
+        y: 367.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(memory: list) -> dict:\n    \"\"\"\n    Difyのmemory変数(Array[Object])から、\n\
+          \    profileとrequestsを抽出し、JSON文字列として出力する。\n    \"\"\"\n    try:\n      \
+          \  # 配列の最初の要素を取得\n        if isinstance(memory, list) and len(memory) >\
+          \ 0:\n            memory_obj = memory[0]\n        else:\n            memory_obj\
+          \ = {}\n\n        # 必要な情報を抽出\n        profile_str = json.dumps(memory_obj.get(\"\
+          profile\", {}), ensure_ascii=False, indent=2)\n        requests_str = json.dumps(memory_obj.get(\"\
+          requests\", {}), ensure_ascii=False, indent=2)\n\n        return {\n   \
+          \         \"profile_context\": profile_str,\n            \"requests_context\"\
+          : requests_str\n        }\n    except Exception as e:\n        return {\
+          \ \"error\": str(e) }"
+        code_language: python3
+        desc: ''
+        outputs:
+          profile_context:
+            children: null
+            type: string
+          requests_context:
+            children: null
+            type: string
+        selected: false
+        title: コンテキスト整形 B
+        type: code
+        variables:
+        - value_selector:
+          - conversation
+          - memory
+          value_type: array[object]
+          variable: memory
+      height: 54
+      id: '17555996655750'
+      position:
+        x: 5981
+        y: 929
+      positionAbsolute:
+        x: 5981
+        y: 929
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(memory: list) -> dict:\n    \"\"\"\n    Difyのmemory変数(Array[Object])から、\n\
+          \    profileとrequestsを抽出し、JSON文字列として出力する。\n    \"\"\"\n    try:\n      \
+          \  # 配列の最初の要素を取得\n        if isinstance(memory, list) and len(memory) >\
+          \ 0:\n            memory_obj = memory[0]\n        else:\n            memory_obj\
+          \ = {}\n\n        # 必要な情報を抽出\n        profile_str = json.dumps(memory_obj.get(\"\
+          profile\", {}), ensure_ascii=False, indent=2)\n        requests_str = json.dumps(memory_obj.get(\"\
+          requests\", {}), ensure_ascii=False, indent=2)\n\n        return {\n   \
+          \         \"profile_context\": profile_str,\n            \"requests_context\"\
+          : requests_str\n        }\n    except Exception as e:\n        return {\
+          \ \"error\": str(e) }"
+        code_language: python3
+        desc: ''
+        outputs:
+          profile_context:
+            children: null
+            type: string
+          requests_context:
+            children: null
+            type: string
+        selected: false
+        title: コンテキスト整形
+        type: code
+        variables:
+        - value_selector:
+          - conversation
+          - memory
+          value_type: array[object]
+          variable: memory
+      height: 54
+      id: '17555998217170'
+      position:
+        x: 3977
+        y: 630
+      positionAbsolute:
+        x: 3977
+        y: 630
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(memory: list) -> dict:\n    \"\"\"\n    Difyのmemory変数(Array[Object])から、\n\
+          \    profileとrequestsを抽出し、JSON文字列として出力する。\n    \"\"\"\n    try:\n      \
+          \  # 配列の最初の要素を取得\n        if isinstance(memory, list) and len(memory) >\
+          \ 0:\n            memory_obj = memory[0]\n        else:\n            memory_obj\
+          \ = {}\n\n        # 必要な情報を抽出\n        profile_str = json.dumps(memory_obj.get(\"\
+          profile\", {}), ensure_ascii=False, indent=2)\n        requests_str = json.dumps(memory_obj.get(\"\
+          requests\", {}), ensure_ascii=False, indent=2)\n\n        return {\n   \
+          \         \"profile_context\": profile_str,\n            \"requests_context\"\
+          : requests_str\n        }\n    except Exception as e:\n        return {\
+          \ \"error\": str(e) }"
+        code_language: python3
+        desc: ''
+        outputs:
+          profile_context:
+            children: null
+            type: string
+          requests_context:
+            children: null
+            type: string
+        selected: false
+        title: コンテキスト整形
+        type: code
+        variables:
+        - value_selector:
+          - conversation
+          - memory
+          value_type: array[object]
+          variable: memory
+      height: 54
+      id: '17555998980340'
+      position:
+        x: 6315
+        y: 528
+      positionAbsolute:
+        x: 6315
+        y: 528
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(memory: list) -> dict:\n    \"\"\"\n    Difyのmemory変数(Array[Object])から、\n\
+          \    profileとrequestsを抽出し、JSON文字列として出力する。\n    \"\"\"\n    try:\n      \
+          \  # 配列の最初の要素を取得\n        if isinstance(memory, list) and len(memory) >\
+          \ 0:\n            memory_obj = memory[0]\n        else:\n            memory_obj\
+          \ = {}\n\n        # 必要な情報を抽出\n        profile_str = json.dumps(memory_obj.get(\"\
+          profile\", {}), ensure_ascii=False, indent=2)\n        requests_str = json.dumps(memory_obj.get(\"\
+          requests\", {}), ensure_ascii=False, indent=2)\n\n        return {\n   \
+          \         \"profile_context\": profile_str,\n            \"requests_context\"\
+          : requests_str\n        }\n    except Exception as e:\n        return {\
+          \ \"error\": str(e) }"
+        code_language: python3
+        desc: ''
+        outputs:
+          profile_context:
+            children: null
+            type: string
+          requests_context:
+            children: null
+            type: string
+        selected: false
+        title: コンテキスト整形 (1)
+        type: code
+        variables:
+        - value_selector:
+          - conversation
+          - memory
+          value_type: array[object]
+          variable: memory
+      height: 54
+      id: '17556000000140'
+      position:
+        x: 6649
+        y: 1080
+      positionAbsolute:
+        x: 6649
+        y: 1080
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(memory: list) -> dict:\n    \"\"\"\n    Difyのmemory変数(Array[Object])から、\n\
+          \    profileとrequestsを抽出し、JSON文字列として出力する。\n    \"\"\"\n    try:\n      \
+          \  # 配列の最初の要素を取得\n        if isinstance(memory, list) and len(memory) >\
+          \ 0:\n            memory_obj = memory[0]\n        else:\n            memory_obj\
+          \ = {}\n\n        # 必要な情報を抽出\n        profile_str = json.dumps(memory_obj.get(\"\
+          profile\", {}), ensure_ascii=False, indent=2)\n        requests_str = json.dumps(memory_obj.get(\"\
+          requests\", {}), ensure_ascii=False, indent=2)\n\n        return {\n   \
+          \         \"profile_context\": profile_str,\n            \"requests_context\"\
+          : requests_str\n        }\n    except Exception as e:\n        return {\
+          \ \"error\": str(e) }"
+        code_language: python3
+        desc: ''
+        outputs:
+          profile_context:
+            children: null
+            type: string
+          requests_context:
+            children: null
+            type: string
+        selected: false
+        title: コンテキスト整形 (1)
+        type: code
+        variables:
+        - value_selector:
+          - conversation
+          - memory
+          value_type: array[object]
+          variable: memory
+      height: 54
+      id: '17556000708650'
+      position:
+        x: 6983
+        y: 1234
+      positionAbsolute:
+        x: 6983
+        y: 1234
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(memory: list) -> dict:\n    \"\"\"\n    Difyのmemory変数(Array[Object])から、\n\
+          \    profileとrequestsを抽出し、JSON文字列として出力する。\n    \"\"\"\n    try:\n      \
+          \  # 配列の最初の要素を取得\n        if isinstance(memory, list) and len(memory) >\
+          \ 0:\n            memory_obj = memory[0]\n        else:\n            memory_obj\
+          \ = {}\n\n        # 必要な情報を抽出\n        profile_str = json.dumps(memory_obj.get(\"\
+          profile\", {}), ensure_ascii=False, indent=2)\n        requests_str = json.dumps(memory_obj.get(\"\
+          requests\", {}), ensure_ascii=False, indent=2)\n\n        return {\n   \
+          \         \"profile_context\": profile_str,\n            \"requests_context\"\
+          : requests_str\n        }\n    except Exception as e:\n        return {\
+          \ \"error\": str(e) }"
+        code_language: python3
+        desc: ''
+        outputs:
+          profile_context:
+            children: null
+            type: string
+          requests_context:
+            children: null
+            type: string
+        selected: false
+        title: コンテキスト整形 (1)
+        type: code
+        variables:
+        - value_selector:
+          - conversation
+          - memory
+          value_type: array[object]
+          variable: memory
+      height: 54
+      id: '17556000775140'
+      position:
+        x: 7317
+        y: 1422
+      positionAbsolute:
+        x: 7317
+        y: 1422
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '# あなたが利用できる情報（コンテキスト）
+
+            - ユーザーの入力情報: {{#sys.query#}}
+
+            - ユーザーの名前やプロフィール情報: {{#conversation.memory#}}
+
+            - ユーザーの現在のリクエスト内容（JSON形式）: {{#1755599442832.requests_context#}}
+
+            - このリクエストに不足している情報の分析結果（あなたの思考）: {{{#1755598782790.structured_output.reasoning#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 368ccd6e-1aab-4d49-863b-d7186ed95891
+          role: system
+          text: '# あなたの役割（アイデンティティ）
+
+            あなたは、相手の言葉の裏にある真のニーズや目的を引き出すのが得意な、超一流のコーチング・インタビュアーです。あなたの質問は、相手に新たな気づきを与え、思考を整理させます。'
+        - id: 95535133-7d32-485a-81db-711a364926a1
+          role: user
+          text: '# あなたの厳密なタスク
+
+            あなたの唯一のタスクは、コンテキストを分析し、**リクエストに不足している情報（reasoning）を補うための、最も的確で、かつ温かみのある深掘り質問を1つだけ**生成することです。
+
+
+            ## 質問生成のルール
+
+            1.  **肯定から始める:** まず、「素晴らしいですね」「よく見えてきましたね」のように、現在のリクエスト内容を肯定的に受け止めてください。
+
+            2.  **思考プロセスを翻訳する:** `reasoning`で示されている「不足している点」を、ユーザーに分かりやすい、自然な会話言葉に翻訳して質問してください。
+
+            3.  **相手の可能性を引き出す聞き方:** 「もしよろしければ…」「例えば…」といったクッション言葉を使い、相手が答えやすいように配慮してください。
+
+            4.  出力は、ユーザーに語りかける質問文そのものだけにしてください。
+
+
+            ## 応答のパーソナライズ
+
+            - もし「ユーザーの名前」が判明していれば、応答の冒頭で「〇〇さん、」と自然に呼びかけてください。'
+        - id: 4ed1e990-4159-4191-8f97-b1745788ea45
+          role: assistant
+          text: '# reasoningが「WHY（目的）が不明確」だった場合の出力例
+
+
+            〇〇さん、ありがとうございます。会いたい人物像が、かなり具体的になってきましたね！
+
+
+            もしよろしければ、もう少しだけ深くお伺いしたいのですが、その「技術的な壁打ち相手」の方と出会うことで、みらいさんご自身は、最終的にどのような状態になることを目指していらっしゃいますか？
+
+            例えば、プロジェクトに関する特定の意思決定ができるようになりたい、といった目的があれば、ぜひ教えてください。'
+        selected: false
+        title: 1c. リクエスト深掘り質問生成
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1755600212316'
+      position:
+        x: 8319
+        y: 252.5
+      positionAbsolute:
+        x: 8319
+        y: 252.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1755600212316.text#}}'
+        desc: ''
+        selected: false
+        title: 深掘り質問生成回答
+        type: answer
+        variables: []
+      height: 105
+      id: '1755600389924'
+      position:
+        x: 8653
+        y: 252.5
+      positionAbsolute:
+        x: 8653
+        y: 252.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '# あなたが利用できる情報（コンテキスト）
+
+            - ユーザーの入力情報: {{#sys.query#}}
+
+            - ユーザーの名前やプロフィール情報: {{#conversation.memory#}}
+
+            - ユーザーの現在のリクエスト内容（JSON形式）: {{#17555996655750.requests_context#}}
+
+            - このリクエストに不足している情報の分析結果（あなたの思考）:  {{#17555989086750.structured_output.reasoning#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 368ccd6e-1aab-4d49-863b-d7186ed95891
+          role: system
+          text: '# あなたの役割（アイデンティティ）
+
+            あなたは、相手の言葉の裏にある真のニーズや目的を引き出すのが得意な、超一流のコーチング・インタビュアーです。あなたの質問は、相手に新たな気づきを与え、思考を整理させます。'
+        - id: 95535133-7d32-485a-81db-711a364926a1
+          role: user
+          text: '# あなたの厳密なタスク
+
+            あなたの唯一のタスクは、コンテキストを分析し、**リクエストに不足している情報（reasoning）を補うための、最も的確で、かつ温かみのある深掘り質問を1つだけ**生成することです。
+
+
+            ## 質問生成のルール
+
+            1.  **肯定から始める:** まず、「素晴らしいですね」「よく見えてきましたね」のように、現在のリクエスト内容を肯定的に受け止めてください。
+
+            2.  **思考プロセスを翻訳する:** `reasoning`で示されている「不足している点」を、ユーザーに分かりやすい、自然な会話言葉に翻訳して質問してください。
+
+            3.  **相手の可能性を引き出す聞き方:** 「もしよろしければ…」「例えば…」といったクッション言葉を使い、相手が答えやすいように配慮してください。
+
+            4.  出力は、ユーザーに語りかける質問文そのものだけにしてください。
+
+
+            ## 応答のパーソナライズ
+
+            - もし「ユーザーの名前」が判明していれば、応答の冒頭で「〇〇さん、」と自然に呼びかけてください。'
+        - id: 4ed1e990-4159-4191-8f97-b1745788ea45
+          role: assistant
+          text: '# reasoningが「WHY（目的）が不明確」だった場合の出力例
+
+
+            〇〇さん、ありがとうございます。会いたい人物像が、かなり具体的になってきましたね！
+
+
+            もしよろしければ、もう少しだけ深くお伺いしたいのですが、その「技術的な壁打ち相手」の方と出会うことで、みらいさんご自身は、最終的にどのような状態になることを目指していらっしゃいますか？
+
+            例えば、プロジェクトに関する特定の意思決定ができるようになりたい、といった目的があれば、ぜひ教えてください。'
+        selected: false
+        title: 1c. リクエスト深掘り質問生成 (1)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '17556004106170'
+      position:
+        x: 7317
+        y: 673
+      positionAbsolute:
+        x: 7317
+        y: 673
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#17556004106170.text#}}'
+        desc: ''
+        selected: false
+        title: 深掘り質問生成回答
+        type: answer
+        variables: []
+      height: 105
+      id: '17556004131570'
+      position:
+        x: 7651
+        y: 683.5
+      positionAbsolute:
+        x: 7651
+        y: 683.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: empty
+            id: 68bb4aa0-aef9-4a14-a841-26e725cb62aa
+            value: ''
+            varType: array[object]
+            variable_selector:
+            - conversation
+            - memory
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 0a. 初回入力チェック
+        type: if-else
+      height: 126
+      id: '1755604753838'
+      position:
+        x: 364
+        y: 2153.5
+      positionAbsolute:
+        x: 364
+        y: 2153.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '# あなたが利用できる情報（コンテキスト）
+
+            - ユーザーの最初の発言（要約）: {{#1755583954150.structured_output.summary#}}
+
+            - ユーザーの最初の発言（全文）: {{#sys.query#}}
+
+            '
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 69057c2f-86b8-428b-9755-ceeef0d6b28a
+          role: system
+          text: あなたは、対話の冒頭で主導権を握り、ユーザーに安心感を与えつつ、今後の対話の進め方を明確に提示できる、非常に優秀なオンボーディング・スペシャリストです。
+        - role: user
+          text: '# あなたの厳密なタスク
+
+            ユーザーの最初の発言に軽く応答した後、今後の対話の全体像（ロードマップ）を提示し、最後にプロフィール作成の第一歩として名前を尋ねる、という3つの要素をすべて含んだ、自然で丁寧な応答メッセージを生成してください。
+
+
+            ## 応答生成のルール
+
+            1.  **軽い応答:** まず、ユーザーの最初の発言（`summary`）を受け止め、「お話しいただきありがとうございます」「承知いたしました」といった、簡潔な肯定の言葉を返します。
+
+            2.  **ロードマップ提示:** 次に、「今後の進め方について、簡単にご説明しますね」と切り出し、「①まず、いくつか質問をさせていただき、『プロフィール』を一緒に作成します。
+            ②それが完成したら、次に『会いたい人物像』を具体化し、マッチングに進みます」という2ステップの計画を明確に伝えてください。
+
+            3.  **名前の質問:** 最後に、「それでは、まず第一歩として、あなたのお名前から教えていただけますでしょうか？」と、具体的で丁寧な質問で締めくくってください。
+
+            4.  出力は、ユーザーに語りかける自然な応答メッセージそのものだけにしてください。'
+        selected: false
+        title: 名前質問＆ロードマップ提示
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1756201560250'
+      position:
+        x: 1548
+        y: 1721.5
+      positionAbsolute:
+        x: 1548
+        y: 1721.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1756201560250.text#}}'
+        desc: ''
+        selected: false
+        title: 名前質問応答
+        type: answer
+        variables: []
+      height: 105
+      id: '1756201679026'
+      position:
+        x: 1882
+        y: 1721.5
+      positionAbsolute:
+        x: 1882
+        y: 1721.5
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '# あなたが利用できる情報（コンテキスト）
+
+            - 現在のワーキングメモリの状態: {{#conversation.memory#}}
+
+            - ユーザーが直前に話してくれた情報（要約）: {{#2. 思考と判断.structured_output.summary#}} /
+
+            - ユーザーの最新メッセージ（全文）: {{#sys.query#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 0b775776-d818-461e-b7dd-940f869ca931
+          role: system
+          text: あなたは、対話の全体像を簡潔かつ分かりやすく説明し、相手に安心感を与えつつ、次に何をすべきかを明確に提示できる、優れたファシリテーターです。
+        - id: 65680001-3dd1-4ca8-a495-d4e67a5098a5
+          role: user
+          text: "# あなたの厳密なタスク\nまずユーザーが提供してくれた情報（`sys.query`）に感謝し、今後の対話の2ステップ計画を提示し、最後に次に聞くべき最も自然な質問を投げかける、という構成の応答メッセージを生成してください。\n\
+            \n## 応答生成のルール\n1.  **感謝と肯定:** ユーザーが話してくれた情報（`sys.query`）を肯定的に受け止めます。例えば、「『株式会社スタジオプレーリーで働いています』とのこと、教えていただきありがとうございます！」のように、具体的な言葉を引用するとより自然です。\n\
+            2.  **ロードマップ提示:** 「今後の進め方について…」と切り出し、「①まず『プロフィール』を一緒に完成させ、②次に『会いたい人物像』を具体化します」という計画を伝えます。\n\
+            3.  **次の質問:** 以下のルールに従い、次に聞くべき質問を生成します。\n    - **もしメモリにまだ`name`がない場合:**\
+            \ 「それではまず、あなたのお名前から教えていただけますか？」と名前を尋ねてください。\n    - **もしメモリに`name`は既にあるが、`role`がない場合:**\
+            \ 「〇〇さん（名前を呼ぶ）、次にあなたのお仕事について教えていただけますか？」と役職を尋ねてください。\n    - **もし`name`も`role`もある場合:**\
+            \ 「〇〇さん、次はそのお仕事を通じて、どのようなことを実現したいか、あなたのビジョンについて教えていただけますか？」と、より深い質問に進んでください。"
+        selected: false
+        title: ロードマップ提示メッセージ生成
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1756202663914'
+      position:
+        x: 6315
+        y: 1783
+      positionAbsolute:
+        x: 6315
+        y: 1783
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1756202663914.text#}}'
+        desc: ''
+        selected: false
+        title: ロードマップ提示応答
+        type: answer
+        variables: []
+      height: 105
+      id: '1756202837930'
+      position:
+        x: 6649
+        y: 1791.5
+      positionAbsolute:
+        x: 6649
+        y: 1791.5
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '# あなたが利用できる情報（コンテキスト）
+
+            - ユーザーの名前（もし判明していれば）: {{#conversation.memory#}}
+
+            - ユーザーの悩みや思考の停滞を示唆するメッセージ: {{#sys.query#}}
+
+            - 私たち（AI）が直前に尋ねたが、ユーザーが答えに窮してしまった質問の内容（reasoning）を推測するデータ: {{#conversation.memory#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 523c2edf-3a71-4045-bd9e-a72885e1d5ad
+          role: system
+          text: 'あなたは、相手が行き詰まっている気持ちに深く共感し、プレッシャーを与えずに視点を変えることで、新たな気づきを促すのが得意な、経験豊富なコーチです。
+
+            '
+        - id: 6d806ea7-b38d-4c3a-8672-0b603b51572c
+          role: user
+          text: "# あなたの厳密なタスク\nユーザーの「分からない」「難しい」という気持ちに完全に寄り添った上で、直前の質問を、より答えやすい**「視点を変えた代替質問」**に変換し、応答メッセージを生成してください。\n\
+            \n## 応答生成のルール\n1.  **完全な共感:** まず、「とんでもないです！」「そうですよね、難しい質問でした」のように、ユーザーの気持ちを全面的に肯定し、安心させてください。\n\
+            2.  **質問の戦略的転換:** 直前の質問の本質（例：「ビジョンは？」）を捉え、それをより具体的で、過去の経験や感情に基づいた質問に変換してください。\n\
+            \    - **例1（ビジョン→経験）:** 「では質問を変えますね。最近のお仕事で、大変だったけど『これをやって良かった！』と心から思えた瞬間は、どんな時でしたか？」\n\
+            \    - **例2（価値観→感情）:** 「でしたら、少し違う角度からお伺いしますね。どんな時に『良い仕事ができたな』と、やりがいや満足感を感じますか？」\n\
+            3.  出力は、ユーザーに語りかける自然な応答メッセージそのものだけにしてください。"
+        selected: false
+        title: コーチング介入
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '1756203059035'
+      position:
+        x: 6649
+        y: 1936.5
+      positionAbsolute:
+        x: 6649
+        y: 1936.5
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1756203059035.text#}}'
+        desc: ''
+        selected: false
+        title: コーチング介入応答
+        type: answer
+        variables: []
+      height: 105
+      id: '1756203308614'
+      position:
+        x: 6983
+        y: 1913
+      positionAbsolute:
+        x: 6983
+        y: 1913
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -3430.5912979819414
+      y: -319.2489286694532
+      zoom: 0.6993080413692311

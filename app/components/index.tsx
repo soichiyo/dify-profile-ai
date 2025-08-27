@@ -10,7 +10,7 @@ import Toast from '@/app/components/base/toast'
 import Sidebar from '@/app/components/sidebar'
 import ConfigSence from '@/app/components/config-scence'
 import Header from '@/app/components/header'
-import { fetchAppParams, fetchChatList, fetchConversations, generationConversationName, sendChatMessage, updateFeedback } from '@/service'
+import { fetchAppParams, fetchChatList, fetchConversations, generationConversationName, sendChatMessage, updateFeedback, logMessageEnd, logWorkflowFinished, logNodeFinished, syncMemoryFromConversation, syncConversationMemoryFromDify } from '@/service'
 import type { ChatItem, ConversationItem, Feedbacktype, PromptConfig, VisionFile, VisionSettings } from '@/types/app'
 import { Resolution, TransferMethod, WorkflowRunningStatus } from '@/types/app'
 import Chat from '@/app/components/chat'
@@ -155,6 +155,10 @@ const Main: FC<IMainProps> = () => {
 
     if (isNewConversation && isChatStarted)
       setChatList(generateNewChatListWithOpenStatement())
+    // sync memory for existing conversation
+    if (!isNewConversation && currConversationId) {
+      syncConversationMemoryFromDify(currConversationId).catch(() => {})
+    }
   }
   useEffect(handleConversationSwitch, [currConversationId, inited])
 
@@ -471,6 +475,14 @@ const Main: FC<IMainProps> = () => {
         resetNewConversationInputs()
         setChatNotStarted()
         setCurrConversationId(tempNewConversationId, APP_ID, true)
+        // pull latest memory after new conversation is created
+        if (tempNewConversationId)
+          syncConversationMemoryFromDify(tempNewConversationId).catch(() => {})
+        // local logging (message) idempotent upsert with final conversation id
+        try {
+          if (tempNewConversationId)
+            await logMessageEnd({ message_id: responseItem.id, conversation_id: tempNewConversationId, query: questionItem.content, answer: responseItem.content })
+        } catch {}
         setRespondingFalse()
       },
       onFile(file) {
@@ -552,6 +564,15 @@ const Main: FC<IMainProps> = () => {
             draft.push({ ...responseItem })
           })
         setChatList(newListWithAnswer)
+        // local logging (message): try best, final upsert will run on onCompleted
+        try {
+          const convIdForNow = (isNewConversation ? (tempNewConversationId || '') : prevTempNewConversationId)
+          if (convIdForNow) {
+            logMessageEnd({ message_id: responseItem.id, conversation_id: convIdForNow, query: questionItem.content, answer: responseItem.content })
+            // sync memory after message end
+            syncConversationMemoryFromDify(convIdForNow).catch(() => {})
+          }
+        } catch {}
       },
       onMessageReplace: (messageReplace) => {
         setChatList(produce(
@@ -595,6 +616,18 @@ const Main: FC<IMainProps> = () => {
             ...responseItem,
           }
         }))
+        // local logging (workflow run)
+        try {
+          const convIdFinal = (isNewConversation ? (tempNewConversationId || '') : prevTempNewConversationId)
+          if (responseItem.workflow_run_id && convIdFinal)
+            logWorkflowFinished({ workflow_run_id: responseItem.workflow_run_id, conversation_id: convIdFinal, message_id: responseItem.id, status: data.status, error: (data as any)?.error })
+        } catch {}
+        // sync memory after workflow finished
+        try {
+          const convIdFinal = (isNewConversation ? (tempNewConversationId || '') : prevTempNewConversationId)
+          if (convIdFinal)
+            syncConversationMemoryFromDify(convIdFinal).catch(() => {})
+        } catch {}
       },
       onNodeStarted: ({ data }) => {
         responseItem.workflowProcess!.tracing!.push(data as any)
@@ -616,6 +649,11 @@ const Main: FC<IMainProps> = () => {
             ...responseItem,
           }
         }))
+        // local logging (workflow node)
+        try {
+          if (responseItem.workflow_run_id)
+            logNodeFinished({ run_id: responseItem.workflow_run_id, node_id: data.node_id, title: (data as any)?.title, status: data.status, error: (data as any)?.error })
+        } catch {}
       },
     })
   }

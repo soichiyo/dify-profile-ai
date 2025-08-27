@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model MessageLog {
+  id             String   @id // Dify message_id
+  conversationId String
+  userId         String
+  role           String   // 'user' | 'assistant'
+  query          String?
+  answer         String?
+  createdAt      DateTime @default(now())
+}
+
+model WorkflowRunLog {
+  id             String   @id // workflow_run_id
+  conversationId String
+  messageId      String
+  status         String   // running | succeeded | failed | stopped
+  error          String?
+  createdAt      DateTime @default(now())
+}
+
+model WorkflowNodeLog {
+  id        String   @id @default(cuid())
+  runId     String
+  nodeId    String
+  title     String?
+  status    String
+  error     String?
+  createdAt DateTime @default(now())
+
+  @@index([runId])
+}
+
+// ===== User Memory (Step 1) =====
+model UserMemory {
+  userId    String  @id
+  memory    String  // JSON string
+  version   Int     @default(0)
+  updatedAt DateTime @updatedAt
+}
+
+model UserMemoryHistory {
+  id             String   @id @default(cuid())
+  userId         String
+  version        Int
+  snapshot       String   // JSON string
+  source         String?
+  conversationId String?
+  createdAt      DateTime @default(now())
+
+  @@index([userId, version])
+}
+
+// ===== Conversation Memory (Beta) =====
+model ConversationMemory {
+  conversationId String   @id
+  userId         String   // for reference
+  memory         String   // JSON string
+  version        Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model ConversationMemoryHistory {
+  id             String   @id @default(cuid())
+  conversationId String
+  userId         String
+  version        Int
+  snapshot       String   // JSON string
+  source         String?
+  createdAt      DateTime @default(now())
+
+  @@index([conversationId, version])
+  @@index([userId])
+}

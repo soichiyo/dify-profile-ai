@@ -135,3 +135,52 @@ Next.jsについて詳しく学ぶには、以下のリソースをご覧くだ�
 ## サポート
 
 問題や質問がある場合は、プロジェクトのIssuesページで報告してください。
+## ローカルDBログ（検証用）
+
+ユーザーの会話やワークフローログをローカルSQLiteに保存する機能を追加しました（Prisma使用）。
+
+- 環境変数: `.env.local` に以下を追加してください。
+
+```bash
+DATABASE_URL="file:./dev.db"
+```
+
+- Prismaセットアップ:
+
+```bash
+npm run prisma:generate
+npm run prisma:migrate -- --name init
+```
+
+- 保存対象とAPI:
+  - メッセージ: `POST /api/logs/message`（最終回答と質問を保存）
+  - ワークフロー: `POST /api/logs/workflow`（実行結果の成否・エラー）
+  - ノード: `POST /api/logs/node`（各ノードの終了イベント）
+
+フロントはストリーミング完了時に上記APIへ自動POSTします。
+
+## ユーザーメモリー（Step 1）
+
+将来のベクトル検索やマッチングのため、ユーザー単位のメモリーJSONをローカルDBに保持します。
+
+- エンドポイント:
+  - GET `/api/user-memory` 現在のユーザー（`BETA_USER_ID`または`?user=`）のメモリーとバージョンを取得
+  - POST `/api/user-memory` メモリーをマージして保存（body: `{ memory: object, source?: string, conversation_id?: string, replace?: boolean }`）
+  - GET `/api/user-memory/history?limit=50` 履歴を降順で取得
+
+- 仕様:
+  - デフォルトは深いマージ。`replace: true`で全置換。
+  - 履歴はスナップショット（フルJSON）を保存。
+  - SQLiteの都合でJSONは文字列として保存しています。
+
+## ベータ運用（ユーザーIDの扱い）
+
+クッキーを使わずに固定のユーザーIDでDifyにアクセスしたい場合は、環境変数で`BETA_USER_ID`を設定してください。
+
+```bash
+BETA_USER_ID="beta-user-001"
+```
+
+- `BETA_USER_ID`が設定されている場合、サーバーは`session_id`クッキーを発行しません。
+- 個別にユーザーIDを切り替えたい場合は、API呼び出しに`?user=<id>`クエリを付与するとそのIDが優先されます（例: `/api/messages?user=tester-123&conversation_id=...`）。
+- Difyのメモリーは「会話ID × user」で管理されます。ベータ中は運用方針に合わせて`BETA_USER_ID`または`?user=`で制御してください。
