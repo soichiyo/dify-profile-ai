@@ -8,6 +8,10 @@ export const dynamic = 'force-dynamic'
 // GET /api/conversation-memory/history?conversation_id=...&limit=50
 export async function GET(req: NextRequest) {
   try {
+    if (!prisma) {
+      return NextResponse.json({ error: 'Database not available' }, { status: 503 })
+    }
+    
     const { user } = getInfo(req)
     const { searchParams } = new URL(req.url)
     const conversationId = searchParams.get('conversation_id')
@@ -35,6 +39,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(payload)
   }
   catch (e: any) {
+    console.error('[ConversationMemory History] Error:', e)
     return NextResponse.json({ error: e?.message || 'server error' }, { status: 500 })
   }
 }
