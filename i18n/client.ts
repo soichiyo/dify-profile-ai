@@ -1,17 +1,12 @@
-import Cookies from 'js-cookie'
 import type { Locale } from '.'
-import { i18n } from '.'
-import { LOCALE_COOKIE_NAME } from '@/config'
-import { changeLanguage } from '@/i18n/i18next-config'
 
-// same logic as server
+// 日本語のみの設定なので、常に'ja'を返す
 export const getLocaleOnClient = (): Locale => {
-  return Cookies.get(LOCALE_COOKIE_NAME) as Locale || i18n.defaultLocale
+  return 'ja'
 }
 
 export const setLocaleOnClient = (locale: Locale, notReload?: boolean) => {
-  Cookies.set(LOCALE_COOKIE_NAME, locale)
-  changeLanguage(locale)
+  // 日本語のみの設定なので、何もしない
   if (!notReload)
     location.reload()
 }
