@@ -19,6 +19,8 @@ export default function AdminPage() {
     'ConversationMemoryHistory', 
     'MessageLog',
     'UserMemory',
+    'WorkflowRunLog',
+    'WorkflowNodeLog',
   ]
 
   const fetchData = async (table: string) => {

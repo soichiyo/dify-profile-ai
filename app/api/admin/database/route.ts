@@ -47,6 +47,20 @@ export async function GET(req: NextRequest) {
         })
         count = await prisma.userMemory.count()
         break
+      case 'WorkflowRunLog':
+        data = await prisma.workflowRunLog.findMany({
+          orderBy: { createdAt: 'desc' },
+          take: limit,
+        })
+        count = await prisma.workflowRunLog.count()
+        break
+      case 'WorkflowNodeLog':
+        data = await prisma.workflowNodeLog.findMany({
+          orderBy: { createdAt: 'desc' },
+          take: limit,
+        })
+        count = await prisma.workflowNodeLog.count()
+        break
       default:
         return NextResponse.json({ error: 'Invalid table name' }, { status: 400 })
     }

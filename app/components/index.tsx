@@ -482,7 +482,9 @@ const Main: FC<IMainProps> = () => {
         try {
           if (tempNewConversationId)
             await logMessageEnd({ message_id: responseItem.id, conversation_id: tempNewConversationId, query: questionItem.content, answer: responseItem.content })
-        } catch {}
+        } catch (err) {
+          console.error('[logMessageEnd] Error:', err)
+        }
         setRespondingFalse()
       },
       onFile(file) {
@@ -572,7 +574,9 @@ const Main: FC<IMainProps> = () => {
             // sync memory after message end
             syncConversationMemoryFromDify(convIdForNow).catch(() => {})
           }
-        } catch {}
+        } catch (err) {
+          console.error('[logMessageEnd] Error:', err)
+        }
       },
       onMessageReplace: (messageReplace) => {
         setChatList(produce(
@@ -621,13 +625,17 @@ const Main: FC<IMainProps> = () => {
           const convIdFinal = (isNewConversation ? (tempNewConversationId || '') : prevTempNewConversationId)
           if (responseItem.workflow_run_id && convIdFinal)
             logWorkflowFinished({ workflow_run_id: responseItem.workflow_run_id, conversation_id: convIdFinal, message_id: responseItem.id, status: data.status, error: (data as any)?.error })
-        } catch {}
+        } catch (err) {
+          console.error('[logWorkflowFinished] Error:', err)
+        }
         // sync memory after workflow finished
         try {
           const convIdFinal = (isNewConversation ? (tempNewConversationId || '') : prevTempNewConversationId)
           if (convIdFinal)
             syncConversationMemoryFromDify(convIdFinal).catch(() => {})
-        } catch {}
+        } catch (err) {
+          console.error('[syncConversationMemoryFromDify] Error:', err)
+        }
       },
       onNodeStarted: ({ data }) => {
         responseItem.workflowProcess!.tracing!.push(data as any)
@@ -653,7 +661,9 @@ const Main: FC<IMainProps> = () => {
         try {
           if (responseItem.workflow_run_id)
             logNodeFinished({ run_id: responseItem.workflow_run_id, node_id: data.node_id, title: (data as any)?.title, status: data.status, error: (data as any)?.error })
-        } catch {}
+        } catch (err) {
+          console.error('[logNodeFinished] Error:', err)
+        }
       },
     })
   }
