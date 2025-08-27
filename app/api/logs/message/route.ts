@@ -3,6 +3,8 @@ import type { NextRequest } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getInfo } from '@/app/api/utils/common'
 
+export const dynamic = 'force-dynamic'
+
 // Save message (user question + assistant answer) after streaming completed
 // Body: { message_id, conversation_id, query, answer }
 export async function POST(req: NextRequest) {

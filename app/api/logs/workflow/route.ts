@@ -3,6 +3,8 @@ import type { NextRequest } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getInfo } from '@/app/api/utils/common'
 
+export const dynamic = 'force-dynamic'
+
 // Save workflow run result
 // Body: { workflow_run_id, conversation_id, message_id, status, error }
 export async function POST(req: NextRequest) {
