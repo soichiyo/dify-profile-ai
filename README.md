@@ -1,22 +1,48 @@
-# Conversation Web App Template
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Prairie AI Beta
 
-## Config App
-Create a file named `.env.local` in the current directory and copy the contents from `.env.example`. Setting the following content:
-```
-# APP ID: This is the unique identifier for your app. You can find it in the app's detail page URL. 
-# For example, in the URL `https://cloud.dify.ai/app/xxx/workflow`, the value `xxx` is your APP ID.
+Prairie AI Betaは、AIエージェントとの会話を可能にするNext.jsベースのWebアプリケーションです。
+
+## プロジェクト概要
+
+- **フレームワーク**: Next.js 14.2.32
+- **言語**: TypeScript
+- **スタイリング**: Tailwind CSS
+- **国際化**: i18next対応（日本語対応）
+- **デプロイ**: Vercel、Docker対応
+
+## 主要機能
+
+- AIエージェントとのリアルタイムチャット
+- 多言語対応（日本語）
+- フィードバック評価システム
+- ファイルアップロード機能
+- レスポンシブデザイン
+
+## 変更履歴
+
+プロジェクトの詳細な変更履歴については、[CHANGELOG.md](./CHANGELOG.md)をご覧ください。
+
+## 設定
+
+### 環境変数
+
+`.env.local`ファイルを作成し、以下の内容を設定してください：
+
+```bash
+# APP ID: アプリの一意識別子
 NEXT_PUBLIC_APP_ID=
 
-# APP API Key: This is the key used to authenticate your app's API requests. 
-# You can generate it on the app's "API Access" page by clicking the "API Key" button in the top-right corner.
+# APP API Key: APIリクエストの認証キー
 NEXT_PUBLIC_APP_KEY=
 
-# APP URL: This is the API's base URL. If you're using the Dify cloud service, set it to: https://api.dify.ai/v1.
+# APP URL: APIのベースURL
 NEXT_PUBLIC_API_URL=
 ```
 
-Config more in `config/index.ts` file:   
+### アプリケーション設定
+
+`config/index.ts`ファイルでアプリケーションの基本設定を行います：
+
 ```js
 export const APP_INFO: AppInfo = {
   title: 'Prairie AI Beta',
@@ -30,51 +56,82 @@ export const isShowPrompt = true
 export const promptTemplate = ''
 ```
 
-## Getting Started
-First, install dependencies:
+## セットアップ
+
+### 依存関係のインストール
+
 ```bash
 npm install
-# or
+# または
 yarn
-# or
+# または
 pnpm install
 ```
 
-Then, run the development server:
+### 開発サーバーの起動
 
 ```bash
 npm run dev
-# or
+# または
 yarn dev
-# or
+# または
 pnpm dev
 ```
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Using Docker
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いて結果を確認してください。
 
-```
+## Docker での使用
+
+```bash
+# イメージのビルド
 docker build . -t <DOCKER_HUB_REPO>/webapp-conversation:latest
-# now you can access it in port 3000
+
+# コンテナの起動（ポート3000でアクセス可能）
 docker run -p 3000:3000 <DOCKER_HUB_REPO>/webapp-conversation:latest
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ビルドとデプロイ
 
-## Learn More
+### 本番ビルド
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 本番サーバーの起動
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+npm start
+```
 
-## Deploy on Vercel
+### Vercel でのデプロイ
 
-> ⚠️ If you are using [Vercel Hobby](https://vercel.com/pricing), your message will be truncated due to the limitation of vercel.
+最も簡単なデプロイ方法は [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) を使用することです。
 
+> ⚠️ [Vercel Hobby](https://vercel.com/pricing) プランを使用している場合、メッセージが制限により切り詰められる可能性があります。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+詳細については [Next.js デプロイメントドキュメント](https://nextjs.org/docs/deployment) をご覧ください。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 技術スタック
+
+- **フロントエンド**: Next.js, React, TypeScript
+- **スタイリング**: Tailwind CSS
+- **国際化**: i18next
+- **ビルドツール**: Webpack, SWC
+- **開発環境**: ESLint, Prettier
+
+## 学習リソース
+
+Next.jsについて詳しく学ぶには、以下のリソースをご覧ください：
+
+- [Next.js Documentation](https://nextjs.org/docs) - Next.jsの機能とAPIについて
+- [Learn Next.js](https://nextjs.org/learn) - インタラクティブなNext.jsチュートリアル
+- [Next.js GitHub repository](https://github.com/vercel/next.js/) - フィードバックとコントリビューションを歓迎します
+
+## ライセンス
+
+このプロジェクトは適切なライセンスの下で公開されています。詳細については、プロジェクトのルートディレクトリにあるライセンスファイルをご確認ください。
+
+## サポート
+
+問題や質問がある場合は、プロジェクトのIssuesページで報告してください。

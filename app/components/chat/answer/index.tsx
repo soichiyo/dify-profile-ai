@@ -15,6 +15,7 @@ import WorkflowProcess from '@/app/components/workflow/workflow-process'
 import { Markdown } from '@/app/components/base/markdown'
 import Button from '@/app/components/base/button'
 import type { Emoji } from '@/types/tools'
+import LogoIcon from '@/app/components/base/logo-icon'
 
 const OperationBtn = ({ innerContent, onClick, className }: { innerContent: React.ReactNode; onClick?: () => void; className?: string }) => (
   <div
@@ -171,7 +172,8 @@ const Answer: FC<IAnswerProps> = ({
   return (
     <div key={id}>
       <div className='flex items-start'>
-        <div className={`${s.answerIcon} w-10 h-10 shrink-0`}>
+        <div className='w-10 h-10 shrink-0 flex items-center justify-center'>
+          <LogoIcon size="medium" />
           {isResponding
             && <div className={s.typeingIcon}>
               <LoadingAnim type='avatar' />
