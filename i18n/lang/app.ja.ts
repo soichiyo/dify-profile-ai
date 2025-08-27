@@ -1,8 +1,8 @@
 const translation = {
   common: {
-    welcome: 'ご利用いただきありがとうございます',
     appUnavailable: 'アプリは利用できません',
     appUnkonwError: 'アプリは利用できません',
+    welcome: 'ようこそ',
   },
   chat: {
     newChat: '新しいチャット',

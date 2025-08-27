@@ -14,9 +14,9 @@ import {
   TemplatingTransform,
   VariableX,
 } from '@/app/components/base/icons/workflow'
-import AppIcon from '@/app/components/base/app-icon'
+import LogoIcon from '@/app/components/base/logo-icon'
 
-type BlockIconProps = {
+export type BlockIconProps = {
   type: BlockEnum
   size?: string
   className?: string
@@ -90,11 +90,9 @@ const BlockIcon: FC<BlockIconProps> = ({
                   ></div>
                 )
                 : (
-                  <AppIcon
+                  <LogoIcon
                     className='shrink-0 !w-full !h-full'
-                    size='tiny'
-                    icon={toolIcon?.content}
-                    background={toolIcon?.background}
+                    size='xs'
                   />
                 )
             }

@@ -3,11 +3,11 @@ export const APP_ID = `${process.env.NEXT_PUBLIC_APP_ID}`
 export const API_KEY = `${process.env.NEXT_PUBLIC_APP_KEY}`
 export const API_URL = `${process.env.NEXT_PUBLIC_API_URL}`
 export const APP_INFO: AppInfo = {
-  title: 'Chat APP',
-  description: '',
-  copyright: '',
+  title: 'Prairie AI Beta',
+  description: '私は、あなたの目標達成に最適な人物との出会いを創出するAI、Prairie AIです。',
+  copyright: 'Studio Prairie Inc.',
   privacy_policy: '',
-  default_language: 'en',
+  default_language: 'ja',
 }
 
 export const isShowPrompt = false

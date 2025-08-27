@@ -11,7 +11,7 @@ import ChevronDown from '@/app/components/base/icons/line/arrows/chevron-down'
 import CheckCircle from '@/app/components/base/icons/solid/general/check-circle'
 import DataSetIcon from '@/app/components/base/icons/public/data-set'
 import type { Emoji } from '@/types/tools'
-import AppIcon from '@/app/components/base/app-icon'
+import LogoIcon from '@/app/components/base/logo-icon'
 
 type Props = {
   payload: ToolInfoInThought
@@ -35,11 +35,9 @@ const getIcon = (toolName: string, allToolIcons: Record<string, string | Emoji>)
         ></div>
       )
       : (
-        <AppIcon
+        <LogoIcon
           className='rounded-[3px] shrink-0'
           size='xs'
-          icon={icon?.content}
-          background={icon?.background}
         />
       ))
 }
