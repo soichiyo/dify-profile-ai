@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
+export const dynamic = 'force-dynamic'
+
 // Save workflow node event (usually on node_finished)
 // Body: { run_id, node_id, title, status, error }
 export async function POST(req: NextRequest) {
