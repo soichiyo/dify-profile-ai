@@ -5,6 +5,8 @@ import { getInfo } from '@/app/api/utils/common'
 import { API_KEY, API_URL } from '@/config'
 import { prisma } from '@/lib/prisma'
 
+export const dynamic = 'force-dynamic'
+
 const deepMerge = (target: any, source: any) => {
   if (typeof target !== 'object' || target === null) return source
   if (typeof source !== 'object' || source === null) return source

@@ -3,6 +3,8 @@ import type { NextRequest } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getInfo } from '@/app/api/utils/common'
 
+export const dynamic = 'force-dynamic'
+
 // GET /api/conversation-memory/history?conversation_id=...&limit=50
 export async function GET(req: NextRequest) {
   try {

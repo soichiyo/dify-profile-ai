@@ -3,6 +3,8 @@ import type { NextRequest } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getInfo } from '@/app/api/utils/common'
 
+export const dynamic = 'force-dynamic'
+
 const deepMerge = (target: any, source: any) => {
   if (typeof target !== 'object' || target === null) return source
   if (typeof source !== 'object' || source === null) return source
