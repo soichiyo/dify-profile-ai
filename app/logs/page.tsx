@@ -1,6 +1,7 @@
 'use client'
 import React, { useMemo, useState } from 'react'
 import useSWR from 'swr'
+import Button from '@/app/components/base/button'
 
 const fetcher = (url: string) => fetch(url).then(r => r.json())
 
@@ -24,7 +25,7 @@ const ManualSync: React.FC<{ memoryUserId: string }> = ({ memoryUserId }) => {
       </div>
       <div>
         <label className='block text-xs text-gray-600 invisible'>.</label>
-        <button className='px-3 py-1 rounded bg-primary-600 text-white' onClick={onSync}>Sync</button>
+        <Button size='sm' variant='primary' onClick={onSync}>Sync</Button>
       </div>
     </div>
   )
@@ -91,10 +92,10 @@ const LogsPage: React.FC = () => {
       <h1 className='text-xl font-semibold mb-4'>Logs</h1>
 
       <div className='flex items-center gap-2 mb-4'>
-        <button className={`px-3 py-1 rounded ${active === 'messages' ? 'bg-gray-900 text-white' : 'bg-gray-100'}`} onClick={() => setActive('messages')}>Messages</button>
-        <button className={`px-3 py-1 rounded ${active === 'workflows' ? 'bg-gray-900 text-white' : 'bg-gray-100'}`} onClick={() => setActive('workflows')}>Workflows</button>
-        <button className={`px-3 py-1 rounded ${active === 'nodes' ? 'bg-gray-900 text-white' : 'bg-gray-100'}`} onClick={() => setActive('nodes')}>Nodes</button>
-        <button className={`px-3 py-1 rounded ${active === 'memory' ? 'bg-gray-900 text-white' : 'bg-gray-100'}`} onClick={() => setActive('memory')}>Memory</button>
+        <Button size='sm' variant={active === 'messages' ? 'primary' : 'secondary'} onClick={() => setActive('messages')}>Messages</Button>
+        <Button size='sm' variant={active === 'workflows' ? 'primary' : 'secondary'} onClick={() => setActive('workflows')}>Workflows</Button>
+        <Button size='sm' variant={active === 'nodes' ? 'primary' : 'secondary'} onClick={() => setActive('nodes')}>Nodes</Button>
+        <Button size='sm' variant={active === 'memory' ? 'primary' : 'secondary'} onClick={() => setActive('memory')}>Memory</Button>
       </div>
 
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-4'>
@@ -127,7 +128,7 @@ const LogsPage: React.FC = () => {
           </div>
         )}
         <div className='self-end'>
-          <button className='px-3 py-1 rounded bg-primary-600 text-white' onClick={onRefresh}>Refresh</button>
+          <Button size='sm' variant='primary' onClick={onRefresh}>Refresh</Button>
         </div>
       </div>
 
@@ -238,7 +239,7 @@ const LogsPage: React.FC = () => {
               </div>
               <div>
                 <label className='block text-xs text-gray-600 invisible'>.</label>
-                <button className='px-3 py-1 rounded bg-gray-900 text-white' onClick={() => { reloadMemory(); reloadMemoryHist() }}>Load</button>
+                <Button size='sm' variant='primary' onClick={() => { reloadMemory(); reloadMemoryHist() }}>Load</Button>
               </div>
             </div>
             {loadingMemory ? (

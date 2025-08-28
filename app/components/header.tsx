@@ -5,6 +5,7 @@ import {
   PencilSquareIcon,
 } from '@heroicons/react/24/solid'
 import LogoIcon from '@/app/components/base/logo-icon'
+import Button from '@/app/components/base/button'
 export type IHeaderProps = {
   title: string
   isMobile?: boolean
@@ -18,29 +19,36 @@ const Header: FC<IHeaderProps> = ({
   onCreateNewChat,
 }) => {
   return (
-    <div className="shrink-0 flex items-center justify-between h-12 px-3 bg-gray-100">
+    <div className="shrink-0 flex items-center justify-between h-14 px-4 bg-white border-b border-gray-100">
       {isMobile
         ? (
-          <div
-            className='flex items-center justify-center h-8 w-8 cursor-pointer'
+          <Button
+            aria-label="Open sidebar"
+            size='sm'
+            variant='ghost'
+            className='h-9 w-9 p-0 rounded-md'
             onClick={() => onShowSideBar?.()}
           >
-            <Bars3Icon className="h-4 w-4 text-gray-500" />
-          </div>
+            <Bars3Icon className="h-5 w-5 text-gray-500" />
+          </Button>
         )
-        : <div></div>}
-      <div className='flex items-center space-x-2'>
+        : <div className="w-9" />}
+      <div className='flex items-center gap-2'>
         <LogoIcon size="small" />
-        <div className=" text-sm text-gray-800 font-bold">{title}</div>
+        <div className="text-sm font-semibold text-gray-900 tracking-tight">{title}</div>
       </div>
       {isMobile
         ? (
-          <div className='flex items-center justify-center h-8 w-8 cursor-pointer'
+          <Button
+            aria-label="New chat"
+            size='sm'
+            variant='ghost'
+            className='h-9 w-9 p-0 rounded-md'
             onClick={() => onCreateNewChat?.()}
           >
-            <PencilSquareIcon className="h-4 w-4 text-gray-500" />
-          </div>)
-        : <div></div>}
+            <PencilSquareIcon className="h-5 w-5 text-gray-500" />
+          </Button>)
+        : <div className="w-9" />}
     </div>
   )
 }

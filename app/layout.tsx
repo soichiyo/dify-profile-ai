@@ -4,6 +4,12 @@ import { getLocaleOnServer } from '@/i18n/server'
 
 import './styles/globals.css'
 import './styles/markdown.scss'
+import { Inter } from 'next/font/google'
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 const LocaleLayout = ({
   children,
@@ -13,10 +19,10 @@ const LocaleLayout = ({
   const locale = getLocaleOnServer()
   return (
     <html lang={locale ?? 'ja'} className="h-full">
-      <body className="h-full">
+      <body className={`h-full bg-gray-50 text-gray-900 antialiased ${inter.className}`}>
         <I18nProvider>
-          <div className="overflow-x-auto">
-            <div className="w-screen h-screen min-w-[300px]">
+          <div className="overflow-x-hidden overflow-y-auto">
+            <div className="w-screen h-[100dvh] min-w-[300px]">
               {children}
             </div>
           </div>

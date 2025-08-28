@@ -2,45 +2,69 @@ import type { FC, MouseEventHandler } from 'react'
 import React from 'react'
 import Spinner from '@/app/components/base/spinner'
 
+type Variant = 'primary' | 'secondary' | 'ghost' | 'link' | 'danger'
+type Size = 'sm' | 'md' | 'lg'
+
 export type IButtonProps = {
+  variant?: Variant
+  // legacy prop support (maps to variant)
   type?: string
+  size?: Size
+  block?: boolean
   className?: string
   disabled?: boolean
   loading?: boolean
   children: React.ReactNode
-  onClick?: MouseEventHandler<HTMLDivElement>
+  onClick?: MouseEventHandler<HTMLButtonElement>
+  htmlType?: 'button' | 'submit' | 'reset'
 }
 
 const Button: FC<IButtonProps> = ({
-  type,
+  variant,
+  type: legacyType,
+  size = 'md',
+  block = false,
   disabled,
   children,
-  className,
+  className = '',
   onClick,
   loading = false,
+  htmlType = 'button',
 }) => {
-  let style = 'cursor-pointer'
-  switch (type) {
-    case 'link':
-      style = disabled ? 'border-solid border border-gray-200 bg-gray-200 cursor-not-allowed text-gray-800' : 'border-solid border border-gray-200 cursor-pointer text-blue-600 bg-white hover:shadow-sm hover:border-gray-300'
-      break
-    case 'primary':
-      style = (disabled || loading) ? 'bg-primary-600/75 cursor-not-allowed text-white' : 'bg-primary-600 hover:bg-primary-600/75 hover:shadow-md cursor-pointer text-white hover:shadow-sm'
-      break
-    default:
-      style = disabled ? 'border-solid border border-gray-200 bg-gray-200 cursor-not-allowed text-gray-800' : 'border-solid border border-gray-200 cursor-pointer text-gray-500 hover:bg-white hover:shadow-sm hover:border-gray-300'
-      break
+  const v: Variant = (variant || (legacyType as Variant) || 'secondary')
+
+  const base = [
+    'inline-flex items-center justify-center select-none',
+    'rounded-lg font-medium transition-colors',
+    'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-600/30',
+    block ? 'w-full' : 'w-auto',
+    disabled || loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
+  ].join(' ')
+
+  const sizes: Record<Size, string> = {
+    sm: 'h-8 px-3 text-sm',
+    md: 'h-9 px-4 text-sm',
+    lg: 'h-11 px-5 text-base',
+  }
+
+  const variants: Record<Variant, string> = {
+    primary: 'bg-primary-600 text-white hover:bg-primary-600/90',
+    secondary: 'border border-gray-200 bg-white text-gray-700 hover:bg-gray-50',
+    ghost: 'text-gray-700 hover:bg-gray-100',
+    link: 'text-primary-600 hover:opacity-80',
+    danger: 'bg-red-600 text-white hover:bg-red-700',
   }
 
   return (
-    <div
-      className={`flex justify-center items-center content-center h-9 leading-5 rounded-lg px-4 py-2 text-base ${style} ${className && className}`}
-      onClick={disabled ? undefined : onClick}
+    <button
+      type={htmlType}
+      className={`${base} ${sizes[size]} ${variants[v]} ${className}`}
+      onClick={disabled || loading ? undefined : onClick}
+      disabled={disabled || loading}
     >
       {children}
-      {/* Spinner is hidden when loading is false */}
-      <Spinner loading={loading} className='!text-white !h-3 !w-3 !border-2 !ml-1' />
-    </div>
+      <Spinner loading={loading} className='!text-current !h-3 !w-3 !border-2 !ml-1' />
+    </button>
   )
 }
 
