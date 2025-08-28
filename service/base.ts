@@ -2,12 +2,13 @@ import { API_PREFIX } from '@/config'
 import Toast from '@/app/components/base/toast'
 import type { AnnotationReply, MessageEnd, MessageReplace, ThoughtItem } from '@/app/components/chat/type'
 import type { VisionFile } from '@/types/app'
+import { API_TIMEOUTS, CONTENT_TYPES } from '@/constants'
 
-const TIME_OUT = 100000
+const TIME_OUT = API_TIMEOUTS.CHAT_MESSAGE
 
 const ContentType = {
-  json: 'application/json',
-  stream: 'text/event-stream',
+  json: CONTENT_TYPES.JSON,
+  stream: CONTENT_TYPES.EVENT_STREAM,
   form: 'application/x-www-form-urlencoded; charset=UTF-8',
   download: 'application/octet-stream', // for download
 }

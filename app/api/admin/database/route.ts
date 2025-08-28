@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { handleApiError, handleValidationError } from '@/app/api/utils/error-handler'
+import { parseQueryParams } from '@/app/api/utils/query-parser'
+import { DATABASE_TABLES, UI_CONSTANTS } from '@/constants'
 
 export const dynamic = 'force-dynamic'
 
@@ -8,12 +11,17 @@ export const dynamic = 'force-dynamic'
 export async function GET(req: NextRequest) {
   try {
     if (!prisma) {
-      return NextResponse.json({ error: 'Database not available' }, { status: 503 })
+      return handleApiError(null, 'Database not available', 503)
     }
     
-    const { searchParams } = new URL(req.url)
-    const table = searchParams.get('table') || 'ConversationMemory'
-    const limit = parseInt(searchParams.get('limit') || '10')
+    const { table, limit } = parseQueryParams(req.url, {
+      table: 'ConversationMemory',
+      limit: 10
+    })
+    
+    if (!DATABASE_TABLES.includes(table as any)) {
+      return handleValidationError('Invalid table name')
+    }
     
     let data: any[] = []
     let count = 0
@@ -61,8 +69,6 @@ export async function GET(req: NextRequest) {
         })
         count = await prisma.workflowNodeLog.count()
         break
-      default:
-        return NextResponse.json({ error: 'Invalid table name' }, { status: 400 })
     }
     
     return NextResponse.json({
@@ -87,8 +93,7 @@ export async function GET(req: NextRequest) {
     })
   }
   catch (e: any) {
-    console.error('[Database Admin] Error:', e)
-    return NextResponse.json({ error: e?.message || 'server error' }, { status: 500 })
+    return handleApiError(e, 'Database Admin GET Error')
   }
 }
 
@@ -96,7 +101,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     if (!prisma) {
-      return NextResponse.json({ error: 'Database not available' }, { status: 503 })
+      return handleApiError(null, 'Database not available', 503)
     }
     
     const body = await req.json()
@@ -122,10 +127,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ tables })
     }
     
-    return NextResponse.json({ error: 'Invalid action' }, { status: 400 })
+    return handleValidationError('Invalid action')
   }
   catch (e: any) {
-    console.error('[Database Admin] Error:', e)
-    return NextResponse.json({ error: e?.message || 'server error' }, { status: 500 })
+    return handleApiError(e, 'Database Admin POST Error')
   }
 }

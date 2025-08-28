@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { DATABASE_TABLES } from '@/constants'
 
 interface DatabaseData {
   table: string
@@ -14,14 +15,7 @@ export default function AdminPage() {
   const [selectedTable, setSelectedTable] = useState('ConversationMemory')
   const [status, setStatus] = useState<any>(null)
 
-  const tables = [
-    'ConversationMemory',
-    'ConversationMemoryHistory', 
-    'MessageLog',
-    'UserMemory',
-    'WorkflowRunLog',
-    'WorkflowNodeLog',
-  ]
+  const tables = DATABASE_TABLES
 
   const fetchData = async (table: string) => {
     setLoading(true)
