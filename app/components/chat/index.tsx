@@ -53,6 +53,7 @@ const Chat: FC<IChatProps> = ({
 
   const [query, setQuery] = React.useState('')
   const queryRef = useRef('')
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
 
   const handleContentChange = (e: any) => {
     const value = e.target.value
@@ -106,13 +107,15 @@ const Chat: FC<IChatProps> = ({
         queryRef.current = ''
       }
     }
+    // blur to close iOS keyboard and restore viewport
+    try { textAreaRef.current?.blur() } catch {}
   }
 
   const handleKeyUp = (e: any) => {
     if (e.code === 'Enter') {
       e.preventDefault()
       // prevent send message when using input method enter
-      if (!e.shiftKey && !isUseInputMethod.current)
+      if (!e.shiftKey && !isUseInputMethod.current && queryRef.current.trim().length > 0)
         handleSend()
     }
   }
@@ -189,13 +192,16 @@ const Chat: FC<IChatProps> = ({
               }
               <Textarea
                 className={`
-                  block w-full px-2 pr-[118px] py-[7px] leading-5 max-h-none text-sm text-gray-700 outline-none appearance-none resize-none
+                  block w-full px-2 pr-[118px] py-[7px] max-h-none text-[16px] pc:text-sm leading-6 text-gray-700 outline-none appearance-none resize-none
                   ${visionConfig?.enabled && 'pl-12'}
                 `}
+                inputMode='text'
+                enterKeyHint='send'
                 value={query}
                 onChange={handleContentChange}
                 onKeyUp={handleKeyUp}
                 onKeyDown={handleKeyDown}
+                ref={textAreaRef as any}
                 autoSize
               />
               <div className="absolute bottom-2 right-2 flex items-center h-8">
@@ -209,7 +215,16 @@ const Chat: FC<IChatProps> = ({
                     </div>
                   }
                 >
-                  <div className={`${s.sendBtn} w-8 h-8 cursor-pointer rounded-md`} onClick={handleSend}></div>
+                  <div
+                    className={cn(
+                      s.sendBtn,
+                      'w-8 h-8 rounded-md transition-opacity',
+                      query.trim().length > 0 ? s.sendBtnActive : 'opacity-50 pointer-events-none'
+                    )}
+                    role='button'
+                    aria-disabled={query.trim().length === 0}
+                    onClick={handleSend}
+                  />
                 </Tooltip>
               </div>
             </div>
